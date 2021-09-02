@@ -13,7 +13,7 @@ class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content="#FFF" />
         </Head>
-        <body>
+        <body className="bg-gray-100">
           <Main />
           <NextScript />
         </body>

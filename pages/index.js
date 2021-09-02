@@ -3,8 +3,8 @@ import { useEffect } from "react";
 export default function Home() {
   return (
     <div>
-      <header className="bg-white dark:bg-gray-800">
-        <nav className="bg-white dark:bg-gray-800">
+      <header className="dark:bg-gray-800">
+        <nav className="dark:bg-gray-800">
           <div className="container p-6 mx-auto">
             <a
               className="block text-2xl font-bold text-center text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
@@ -110,6 +110,66 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      <div class="flex items-center justify-center px-5 pt-5 pb-24">
+        <div class="w-full  max-w-md mx-auto ">
+          <div class="px-7 bg-white shadow-lg rounded-2xl">
+            <div class="flex ">
+              <div class="flex-1 group">
+                <a
+                  href="#"
+                  class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500"
+                >
+                  <span class="block px-1 pt-1 pb-1">
+                    <i class="far fa-home text-2xl pt-1 mb-1 block"></i>
+                    <span class="block text-xs pb-2">Home</span>
+                    <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
+                  </span>
+                </a>
+              </div>
+              <div class="flex-1 group mx-auto flex">
+                <a
+                  href="#"
+                  class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500"
+                >
+                  <span class="block px-1 pt-1 pb-1">
+                    <i class="far fa-compass text-2xl pt-1 mb-1 block"></i>
+                    <span class="block text-xs pb-2">Explore</span>
+                    <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
+                  </span>
+                </a>
+              </div>
+              <div class="flex-1 group relative w-full h-full mx-auto">
+                <div className="h-10 w-10 bg-indigo-700 rounded-full absolute"></div>
+              </div>
+              <div class="flex-1 group">
+                <a
+                  href="#"
+                  class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500"
+                >
+                  <span class="block px-1 pt-1 pb-1">
+                    <i class="far fa-search text-2xl pt-1 mb-1 block"></i>
+                    <span class="block text-xs pb-2">Search</span>
+                    <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
+                  </span>
+                </a>
+              </div>
+              <div class="flex-1 group">
+                <a
+                  href="#"
+                  class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500"
+                >
+                  <span class="block px-1 pt-1 pb-1">
+                    <i class="far fa-cog text-2xl pt-1 mb-1 block"></i>
+                    <span class="block text-xs pb-2">Settings</span>
+                    <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
