@@ -1,0 +1,29 @@
+{
+  "name": "Couponas",
+  "short_name": "Coupon",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF",
+  "theme_color": "#FFF",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/icon/favicon.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon/icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/index.jpg",
+      "type": "image/jpg",
+      "sizes": "225x225",
+      "purpose": "any"
+    }
+  ]
+}
