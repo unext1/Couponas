@@ -1,6 +1,6 @@
 const Login = () => {
   return (
-    <div className="flex items-center justify-center container mx-auto my-auto px-5 py-20 md:py-5">
+    <div className="flex items-center justify-center container mx-auto my-auto px-5 py-5">
       <div className="text-gray-500 rounded-3xl max-w-5xl shadow-xl w-full overflow-hidden">
         <div className="md:flex w-full">
           <div className="hidden md:block w-1/2 bg-gradient-to-r from-blue-600 to-purple-700  py-10 px-10">
@@ -208,9 +208,9 @@ const Login = () => {
               />
             </svg>
           </div>
-          <div className="w-full md:w-1/2 py-10 px-5 md:px-10 bg-white">
+          <div className="w-full md:w-1/2 py-5 px-5 md:px-10 bg-white">
             <div className="text-center mb-10">
-              <h1 className="font-bold text-3xl text-gray-900">LOGIN</h1>
+              <h1 className="font-bold text-3xl text-gray-900 pt-3">LOGIN</h1>
               <p>Enter your information to Login</p>
             </div>
             <div>
