@@ -209,7 +209,7 @@ const Login = () => {
             </svg>
           </div>
           <div className="w-full md:w-1/2 py-5 px-5 md:px-10 bg-white">
-            <div className="text-center mb-10">
+            <div className="text-center pb-10">
               <h1 className="font-bold text-3xl text-gray-900 pt-3">LOGIN</h1>
               <p>Enter your information to Login</p>
             </div>
