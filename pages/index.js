@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Link from "next/link";
+import app from "../firebase/firebase.config";
 
 export default function Home() {
   return (
