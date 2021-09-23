@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const Navbar = () => {
+  //make soo when u logged in u see another go back to app.
   return (
     <div>
       <nav className="dark:bg-gray-800 md:block hidden">

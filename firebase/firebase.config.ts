@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import "firebase/firestore";
 // Follow this pattern to import other Firebase services
 // import { } from 'firebase/<service>';
 
@@ -13,3 +14,5 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+export default app;

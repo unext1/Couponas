@@ -1,44 +1,37 @@
+import { useAuthState } from "react-firebase-hooks/auth";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/router";
 
-const Login = () => {
+const Register = () => {
   const router = useRouter();
   const auth = getAuth(app);
-  const user = auth.currentUser;
+  const [user, loading, error] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   console.log(user);
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-        console.log(user);
         router.push("/app");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(error);
       });
   };
   return (
     <>
-      <div className="container mx-auto my-auto px-5 pt-5 block md:hidden">
-        <h1 className="font-bold text-xl uppercase mb-1">Login page</h1>
-        <div className="h-2 w-full bg-gradient-to-r from-black via-gray-100 rounded to-gray-100" />
-      </div>
       <div className="flex items-center justify-center container mx-auto my-auto px-5 py-5 pb-20">
         <div className="text-gray-500 rounded-3xl max-w-5xl shadow-xl w-full overflow-hidden">
           <div className="md:flex w-full">
@@ -249,8 +242,10 @@ const Login = () => {
             </div>
             <div className="w-full md:w-1/2 py-5 px-5 md:px-10 bg-white">
               <div className="text-center pb-10">
-                <h1 className="font-bold text-3xl text-gray-900 pt-3">LOGIN</h1>
-                <p>Enter your information to Login</p>
+                <h1 className="font-bold text-3xl text-gray-900 pt-3">
+                  REGISTER
+                </h1>
+                <p>Enter your information to Register</p>
               </div>
               <div>
                 <div className="flex -mx-3">
@@ -271,7 +266,7 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="flex -mx-3">
-                  <div className="w-full px-3">
+                  <div className="w-full px-3 mb-12">
                     <label className="text-xs font-semibold px-1">
                       Password
                     </label>
@@ -289,18 +284,13 @@ const Login = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex container pt-3 pb-10 pl-1 cursor-pointer hover:text-blue-600 duration-100 transition  ">
-                  <Link href="/register">
-                    <h1>Don&apos;t have a account ?</h1>
-                  </Link>
-                </div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
                     <button
-                      onClick={(e) => handleLogin(e)}
+                      onClick={(e) => handleSignup(e)}
                       className="block w-full max-w-xs mx-auto bg-blue-600 hover:bg-purple-700 text-white rounded-lg px-3 py-3 font-semibold"
                     >
-                      LOGIN NOW
+                      REGISTER NOW
                     </button>
                     <div className="w-full grid grid-cols-2 gap-2 mt-2">
                       <button className="block w-full mx-auto bg-red-600 hover:bg-red-700 text-white rounded-lg px-3 py-3 font-semibold">
@@ -321,4 +311,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
