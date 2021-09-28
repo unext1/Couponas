@@ -34,6 +34,7 @@ const Login = () => {
         console.log(error);
       });
   };
+
   const googleLogin = (e) => {
     e.preventDefault();
 

@@ -24,7 +24,9 @@ const AppProfile = () => {
         displayName: e.target.displayName.value,
         photoURL: e.target.profilePicture.value,
       })
-        .then(() => {})
+        .then(() => {
+          console.log("updated");
+        })
         .catch((error) => {
           console.log("error :-(");
         });

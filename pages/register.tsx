@@ -2,7 +2,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 import Link from "next/link";
@@ -15,6 +16,8 @@ const Register = () => {
   const [user, loading, error] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const provider = new GoogleAuthProvider();
 
   console.log(user);
 
@@ -30,6 +33,19 @@ const Register = () => {
         const errorMessage = error.message;
       });
   };
+
+  const googleLogin = (e) => {
+    e.preventDefault();
+
+    signInWithPopup(auth, provider)
+      .then(() => {
+        router.push("/app");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   if (user) {
     return (
       <div className="text-center">
@@ -305,7 +321,10 @@ const Register = () => {
                       REGISTER NOW
                     </button>
                     <div className="w-full grid grid-cols-2 gap-2 mt-2">
-                      <button className="block w-full mx-auto bg-red-600 hover:bg-red-700 text-white rounded-lg px-3 py-3 font-semibold">
+                      <button
+                        onClick={(e) => googleLogin(e)}
+                        className="block w-full mx-auto bg-red-600 hover:bg-red-700 text-white rounded-lg px-3 py-3 font-semibold"
+                      >
                         Google
                       </button>
                       <button className="block w-full mx-auto bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-3 py-3 font-semibold">
