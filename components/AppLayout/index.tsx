@@ -8,7 +8,7 @@ import Navbar from "./navbar";
 export const AppLayout: FC = ({ children }) => {
   const router = useRouter();
   const auth = getAuth(app);
-  const [user, loading, error] = useAuthState(auth);
+  const user = auth.currentUser;
 
   useEffect(() => {
     console.log(user);

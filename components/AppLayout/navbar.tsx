@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   CalendarIcon,
@@ -27,6 +27,10 @@ function classNames(...classes) {
 
 export default function Navbar({ user }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <div className="h-screen flex overflow-hidden bg-gray-100">
@@ -56,7 +60,7 @@ export default function Navbar({ user }) {
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <div className="relative flex-1 flex flex-col max-w-xs w-full bg-indigo-700">
+            <div className="relative flex-1 flex flex-col max-w-xs w-full bg-gradient-to-b from-blue-600 via-blue-600 to-purple-700">
               <Transition.Child
                 as={Fragment}
                 enter="ease-in-out duration-300"
@@ -110,15 +114,32 @@ export default function Navbar({ user }) {
                 <a href="#" className="flex-shrink-0 group block">
                   <div className="flex items-center">
                     <div>
-                      <img
-                        className="inline-block h-10 w-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
+                      {user?.photoURL ? (
+                        <div className="flex-shrink-0">
+                          <img
+                            className="h-12 w-12 rounded-full"
+                            src={user.photoURL}
+                            alt=""
+                          />
+                        </div>
+                      ) : (
+                        <div className="flex-shrink-0">
+                          <img
+                            className="inline-block h-10 w-10 rounded-full"
+                            src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                            alt=""
+                          />
+                        </div>
+                      )}
                     </div>
                     <div className="ml-3">
                       <p className="text-base font-medium text-white">
-                        Tom Cook
+                        {user.displayName
+                          ? user.displayName
+                          : user.email.substring(
+                              0,
+                              user.email.lastIndexOf("@")
+                            )}{" "}
                       </p>
                       <p className="text-sm font-medium text-indigo-200 group-hover:text-white">
                         View profile
@@ -135,7 +156,7 @@ export default function Navbar({ user }) {
         </Dialog>
       </Transition.Root>
 
-      <div className="hidden bg-gradient-to-b from-blue-600 via-blue-600 to-purple-700 0 md:flex md:flex-shrink-0">
+      <div className="hidden bg-gradient-to-b from-blue-600 via-blue-600 to-purple-700 md:flex md:flex-shrink-0">
         <div className="flex flex-col w-64">
           <div className="flex-1 flex flex-col min-h-0">
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
@@ -171,16 +192,31 @@ export default function Navbar({ user }) {
               <Link href="/app/profile">
                 <a className="flex-shrink-0 w-full group block">
                   <div className="flex items-center">
-                    <div>
-                      <img
-                        className="inline-block h-9 w-9 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </div>
+                    {user?.photoURL ? (
+                      <div className="flex-shrink-0">
+                        <img
+                          className="h-12 w-12 rounded-full"
+                          src={user.photoURL}
+                          alt=""
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex-shrink-0">
+                        <img
+                          className="inline-block h-10 w-10 rounded-full"
+                          src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                          alt=""
+                        />
+                      </div>
+                    )}
                     <div className="ml-3">
                       <p className="text-sm font-medium text-white capitalize ">
-                        {user.email.substring(0, user.email.lastIndexOf("@"))}
+                        {user.displayName
+                          ? user.displayName
+                          : user.email.substring(
+                              0,
+                              user.email.lastIndexOf("@")
+                            )}
                       </p>
                       <p className="text-xs font-medium text-indigo-200 group-hover:text-white">
                         View profile

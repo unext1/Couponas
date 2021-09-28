@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }) {
         </div>
       ) : (
         <div>
-          <PublicLayout>
+          <PublicLayout user={user}>
             <Component {...pageProps} />
           </PublicLayout>
         </div>

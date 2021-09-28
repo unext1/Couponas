@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   //make soo when u logged in u see another go back to app.
   return (
     <div>
@@ -38,11 +38,21 @@ const Navbar = () => {
               blog
             </a>
 
-            <Link href="/login">
-              <a className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-600 mx-1.5 sm:mx-6">
-                Login
-              </a>
-            </Link>
+            {user ? (
+              <div className="flex">
+                <Link href="/app">
+                  <a className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-600 mx-1.5 sm:mx-6">
+                    Go to app
+                  </a>
+                </Link>
+              </div>
+            ) : (
+              <Link href="/login">
+                <a className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-600 mx-1.5 sm:mx-6">
+                  Login
+                </a>
+              </Link>
+            )}
           </div>
         </div>
       </nav>

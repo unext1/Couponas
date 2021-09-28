@@ -1,22 +1,23 @@
 import {
   getAuth,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Login = () => {
   const router = useRouter();
   const auth = getAuth(app);
-  const user = auth.currentUser;
+  const [user, loading, error] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  console.log(user);
+  const provider = new GoogleAuthProvider();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -33,6 +34,30 @@ const Login = () => {
         console.log(error);
       });
   };
+  const googleLogin = (e) => {
+    e.preventDefault();
+
+    signInWithPopup(auth, provider)
+      .then(() => {
+        router.push("/app");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  if (user && !loading) {
+    return (
+      <div className="text-center">
+        <h1 className="mx-auto text-2xl font-bold  py-2 uppercase text-center">
+          You already logged in silly !
+        </h1>
+        <Link href="/register">
+          <a>Press here to go back to app</a>
+        </Link>
+      </div>
+    );
+  }
   return (
     <>
       <div className="container mx-auto my-auto px-5 pt-5 block md:hidden">
@@ -303,7 +328,10 @@ const Login = () => {
                       LOGIN NOW
                     </button>
                     <div className="w-full grid grid-cols-2 gap-2 mt-2">
-                      <button className="block w-full mx-auto bg-red-600 hover:bg-red-700 text-white rounded-lg px-3 py-3 font-semibold">
+                      <button
+                        onClick={(e) => googleLogin(e)}
+                        className="block w-full mx-auto bg-red-600 hover:bg-red-700 text-white rounded-lg px-3 py-3 font-semibold"
+                      >
                         Google
                       </button>
                       <button className="block w-full mx-auto bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-3 py-3 font-semibold">

@@ -30,6 +30,18 @@ const Register = () => {
         const errorMessage = error.message;
       });
   };
+  if (user) {
+    return (
+      <div className="text-center">
+        <h1 className="mx-auto text-2xl font-bold  py-2 uppercase text-center">
+          You already logged in silly !
+        </h1>
+        <Link href="/app">
+          <a>Press here to go back to app</a>
+        </Link>
+      </div>
+    );
+  }
   return (
     <>
       <div className="flex items-center justify-center container mx-auto my-auto px-5 py-5 pb-20">
