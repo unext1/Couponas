@@ -1,5 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import "firebase/firestore";
+import { getDatabase } from "firebase/database";
+
 // Follow this pattern to import other Firebase services
 // import { } from 'firebase/<service>';
 

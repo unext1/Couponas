@@ -11,14 +11,15 @@ import {
   UsersIcon,
   XIcon,
 } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 
 const navigation = [
-  { name: "Dashboard", href: "/app", icon: HomeIcon, current: true },
-  { name: "Team", href: "#", icon: UsersIcon, current: false },
-  { name: "Projects", href: "#", icon: FolderIcon, current: false },
-  { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
-  { name: "Documents", href: "#", icon: InboxIcon, current: false },
-  { name: "Reports", href: "#", icon: ChartBarIcon, current: false },
+  { name: "Dashboard", href: "/app", icon: HomeIcon },
+  { name: "Profile", href: "/app/profile", icon: UsersIcon },
+  { name: "Projects", href: "#", icon: FolderIcon },
+  { name: "Calendar", href: "#", icon: CalendarIcon },
+  { name: "Documents", href: "#", icon: InboxIcon },
+  { name: "Reports", href: "#", icon: ChartBarIcon },
 ];
 
 function classNames(...classes) {
@@ -26,6 +27,7 @@ function classNames(...classes) {
 }
 
 export default function Navbar({ user }) {
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -94,12 +96,11 @@ export default function Navbar({ user }) {
                     <a
                       key={item.name}
                       href={item.href}
-                      className={classNames(
-                        item.current
-                          ? "bg-blue-800 text-white"
-                          : "text-white hover:bg-blue-700 hover:bg-opacity-75",
-                        "group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                      )}
+                      className={
+                        router.asPath == item.href
+                          ? "bg-blue-800 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                          : "text-white hover:bg-blue-700 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                      }
                     >
                       <item.icon
                         className="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300"
@@ -171,12 +172,11 @@ export default function Navbar({ user }) {
                 {navigation.map((item) => (
                   <Link href={item.href} key={item.name}>
                     <a
-                      className={classNames(
-                        item.current
-                          ? "bg-blue-800 text-white"
-                          : "text-white hover:bg-blue-700 hover:bg-opacity-75",
-                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                      )}
+                      className={
+                        router.asPath == item.href
+                          ? "bg-blue-800 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                          : "text-white hover:bg-blue-700 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                      }
                     >
                       <item.icon
                         className="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300"
@@ -229,7 +229,7 @@ export default function Navbar({ user }) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col absolute flex-1 top-2 left-3 bg-gray-100 rounded-xl shadow overflow-hidden z-20">
+      <div className="flex flex-col absolute flex-1 top-2 right-3 bg-gray-100 rounded-xl shadow overflow-hidden z-20">
         <div className="md:hidden p-0.5">
           <button
             type="button"

@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { AppLayout } from "../components/AppLayout/index";
 import { PublicLayout } from "../components/PublicLayout/index";
 import app from "../firebase/firebase.config";
+import { AuthProvider } from "./auth";
 
 function MyApp({ Component, pageProps }) {
   const auth = getAuth(app);
@@ -25,19 +26,21 @@ function MyApp({ Component, pageProps }) {
   }
   return (
     <>
-      {router.route.startsWith("/app") ? (
-        <div>
-          <AppLayout>
-            <Component {...pageProps} />
-          </AppLayout>
-        </div>
-      ) : (
-        <div>
-          <PublicLayout user={user}>
-            <Component {...pageProps} />
-          </PublicLayout>
-        </div>
-      )}
+      <AuthProvider>
+        {router.route.startsWith("/app") ? (
+          <div>
+            <AppLayout>
+              <Component {...pageProps} />
+            </AppLayout>
+          </div>
+        ) : (
+          <div>
+            <PublicLayout user={user}>
+              <Component {...pageProps} />
+            </PublicLayout>
+          </div>
+        )}
+      </AuthProvider>
     </>
   );
 }

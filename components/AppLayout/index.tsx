@@ -23,7 +23,7 @@ export const AppLayout: FC = ({ children }) => {
   return (
     <div className="flex h-screen bg-gray-100">
       <Navbar user={user} />
-      <main className="flex-1 relative w-full h-full overflow-y-auto focus:outline-none pt-10 md:pt-0">
+      <main className="flex-1 relative w-full h-full overflow-y-auto focus:outline-none ">
         {children}
       </main>
     </div>
