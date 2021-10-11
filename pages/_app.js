@@ -8,7 +8,7 @@ import { PublicLayout } from "../components/PublicLayout/index";
 import app from "../firebase/firebase.config";
 import { AuthProvider } from "./auth";
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   const auth = getAuth(app);
   const [user, loading, error] = useAuthState(auth);
   const router = useRouter();
@@ -45,4 +45,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default App;
