@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useContext } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   CalendarIcon,
@@ -12,6 +12,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
+import { AuthContext } from "../../pages/auth";
 
 const navigation = [
   { name: "Dashboard", href: "/app", icon: HomeIcon },
@@ -22,18 +23,15 @@ const navigation = [
   { name: "Reports", href: "#", icon: ChartBarIcon },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
-export default function Navbar({ user }) {
+export default function Navbar() {
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  const { currentUser } = useContext(AuthContext);
 
+  if (!currentUser) {
+    return <h1>Loading...</h1>;
+  }
   return (
     <div className="h-screen flex overflow-hidden bg-gray-100">
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -115,11 +113,11 @@ export default function Navbar({ user }) {
                 <a href="#" className="flex-shrink-0 group block">
                   <div className="flex items-center">
                     <div>
-                      {user?.photoURL ? (
+                      {currentUser.photoURL ? (
                         <div className="flex-shrink-0">
                           <img
                             className="h-12 w-12 rounded-full"
-                            src={user.photoURL}
+                            src={currentUser.photoURL}
                             alt=""
                           />
                         </div>
@@ -135,11 +133,11 @@ export default function Navbar({ user }) {
                     </div>
                     <div className="ml-3">
                       <p className="text-base font-medium text-white">
-                        {user.displayName
-                          ? user.displayName
-                          : user.email.substring(
+                        {currentUser.displayName
+                          ? currentUser.displayName
+                          : currentUser.email.substring(
                               0,
-                              user.email.lastIndexOf("@")
+                              currentUser.email.lastIndexOf("@")
                             )}{" "}
                       </p>
                       <p className="text-sm font-medium text-indigo-200 group-hover:text-white">
@@ -192,11 +190,11 @@ export default function Navbar({ user }) {
               <Link href="/app/profile">
                 <a className="flex-shrink-0 w-full group block">
                   <div className="flex items-center">
-                    {user?.photoURL ? (
+                    {currentUser.photoURL ? (
                       <div className="flex-shrink-0">
                         <img
                           className="h-12 w-12 rounded-full"
-                          src={user.photoURL}
+                          src={currentUser.photoURL}
                           alt=""
                         />
                       </div>
@@ -211,11 +209,11 @@ export default function Navbar({ user }) {
                     )}
                     <div className="ml-3">
                       <p className="text-sm font-medium text-white capitalize ">
-                        {user.displayName
-                          ? user.displayName
-                          : user.email.substring(
+                        {currentUser.displayName
+                          ? currentUser.displayName
+                          : currentUser.email.substring(
                               0,
-                              user.email.lastIndexOf("@")
+                              currentUser.email.lastIndexOf("@")
                             )}
                       </p>
                       <p className="text-xs font-medium text-indigo-200 group-hover:text-white">

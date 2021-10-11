@@ -17,20 +17,19 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const auth = getAuth();
 
-  const [currentUser, SetCurrentUser] = useState();
-  const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState();
+  const [profileRefresh, setProfileRefresh] = useState();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-        setLoading(false);
-        SetCurrentUser(user);
+        setCurrentUser(user);
       } else {
-        console.log("no user ");
+        console.log("no user");
       }
     });
-    return unsubscribe;
-  }, []);
+    setProfileRefresh("negative");
+  }, [profileRefresh]);
 
   const profileUpdate = (dN, pU) => {
     if (currentUser.displayName !== dN || currentUser.photoURL !== pU) {
@@ -39,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         photoURL: pU,
       })
         .then(() => {
-          console.log("user updated");
+          setProfileRefresh("refresh");
         })
         .catch((error) => {
           console.log("error :-(");
@@ -59,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ currentUser, profileUpdate, logout }}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

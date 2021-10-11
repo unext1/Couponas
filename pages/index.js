@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Link from "next/link";
-import app from "../firebase/firebase.config";
+import { AuthContext } from "./auth";
 
 export default function Home() {
+  const { currentUser } = useContext(AuthContext);
+  console.log(currentUser);
   return (
     <div>
       <header className="dark:bg-gray-800 ">

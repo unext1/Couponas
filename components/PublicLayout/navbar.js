@@ -1,7 +1,8 @@
 import Link from "next/link";
-
-const Navbar = ({ user }) => {
-  //make soo when u logged in u see another go back to app.
+import { AuthContext } from "../../pages/auth";
+import { useContext } from "react";
+const Navbar = () => {
+  const { currentUser } = useContext(AuthContext);
   return (
     <div>
       <nav className="dark:bg-gray-800 md:block hidden">
@@ -38,7 +39,7 @@ const Navbar = ({ user }) => {
               blog
             </a>
 
-            {user ? (
+            {currentUser ? (
               <div className="flex">
                 <Link href="/app">
                   <a className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-600 mx-1.5 sm:mx-6">

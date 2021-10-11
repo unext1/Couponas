@@ -1,8 +1,9 @@
 import Navbar from "./navbar";
-export const PublicLayout = ({ children, user }) => {
+
+export const PublicLayout = ({ children }) => {
   return (
     <div className="flex flex-col h-screen">
-      <Navbar user={user} />
+      <Navbar />
       <main className="flex-1 bg-gray-100">{children}</main>
     </div>
   );

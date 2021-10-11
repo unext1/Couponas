@@ -1,28 +1,25 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useEffect, useRef, useContext } from "react";
 import { useRouter } from "next/router";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { getAuth } from "firebase/auth";
-import app from "../../firebase/firebase.config";
 import Navbar from "./navbar";
+import { AuthContext } from "../../pages/auth";
 
 export const AppLayout: FC = ({ children }) => {
+  const { currentUser } = useContext(AuthContext);
   const router = useRouter();
-  const auth = getAuth(app);
-  const user = auth.currentUser;
 
   useEffect(() => {
-    console.log(user);
-    if (!user) {
+    console.log(currentUser);
+    if (!currentUser) {
       router.push("/login");
     }
-  }, [user]);
+  }, [currentUser]);
 
-  if (!user) {
+  if (!currentUser) {
     return <h1 className="text-gray-100">nothing to see</h1>;
   }
   return (
     <div className="flex h-screen bg-gray-100">
-      <Navbar user={user} />
+      <Navbar />
       <main className="flex-1 relative w-full h-full overflow-y-auto focus:outline-none ">
         {children}
       </main>
