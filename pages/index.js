@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 import Link from "next/link";
-import { AuthContext } from "./auth";
+import { AuthContext } from "../components/auth";
 
 export default function Home() {
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
+
   return (
     <div>
       <header className="dark:bg-gray-800 ">
