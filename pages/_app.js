@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { AppLayout } from "../components/AppLayout/index";
 import { PublicLayout } from "../components/PublicLayout/index";
 import app from "../firebase/firebase.config";
-import { AuthProvider } from "./auth";
+import { AuthProvider } from "../components/auth";
 
 function App({ Component, pageProps }) {
   const auth = getAuth(app);

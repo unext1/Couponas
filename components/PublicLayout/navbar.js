@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AuthContext } from "../../pages/auth";
+import { AuthContext } from "../auth";
 import { useContext } from "react";
 const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
@@ -118,7 +118,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </div>{" "}
+      </div>
     </div>
   );
 };

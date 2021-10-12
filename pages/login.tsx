@@ -53,7 +53,7 @@ const Login = () => {
         <h1 className="mx-auto text-2xl font-bold  py-2 uppercase text-center">
           You already logged in silly !
         </h1>
-        <Link href="/register">
+        <Link href="/app">
           <a>Press here to go back to app</a>
         </Link>
       </div>
