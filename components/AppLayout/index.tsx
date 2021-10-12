@@ -3,20 +3,20 @@ import { useRouter } from "next/router";
 import Navbar from "./navbar";
 import app from "../../firebase/firebase.config";
 import { getAuth } from "firebase/auth";
+import { AuthContext } from "../auth";
 
 export const AppLayout: FC = ({ children }) => {
-  const auth = getAuth(app);
-  const user = auth.currentUser;
+  const { loading, currentUser } = useContext(AuthContext);
+
   const router = useRouter();
 
   useEffect(() => {
-    console.log(user);
-    if (!user) {
+    if (!currentUser && !loading) {
       router.push("/login");
     }
-  }, [user]);
+  }, []);
 
-  if (!user) {
+  if (!currentUser) {
     return <h1 className="text-gray-100">nothing to see</h1>;
   }
   return (

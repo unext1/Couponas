@@ -19,11 +19,13 @@ export const AuthProvider = ({ children }) => {
 
   const [currentUser, setCurrentUser] = useState();
   const [profileRefresh, setProfileRefresh] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user);
+        setLoading(false);
       } else {
         console.log("no user");
       }
@@ -58,7 +60,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ currentUser, profileUpdate, logout }}>
+    <AuthContext.Provider
+      value={{ currentUser, profileUpdate, logout, loading }}
+    >
       {children}
     </AuthContext.Provider>
   );
