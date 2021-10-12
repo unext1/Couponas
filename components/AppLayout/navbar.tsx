@@ -12,7 +12,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import { AuthContext } from "../../pages/auth";
+import { AuthContext } from "../auth";
 
 const navigation = [
   { name: "Dashboard", href: "/app", icon: HomeIcon },
@@ -138,7 +138,7 @@ export default function Navbar() {
                           : currentUser.email.substring(
                               0,
                               currentUser.email.lastIndexOf("@")
-                            )}{" "}
+                            )}
                       </p>
                       <p className="text-sm font-medium text-indigo-200 group-hover:text-white">
                         View profile

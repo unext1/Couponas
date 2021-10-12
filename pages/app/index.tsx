@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../auth";
+import { AuthContext } from "../../components/auth";
 
 const AppPage = ({ component, ...rest }) => {
   const { currentUser, profileUpdate } = useContext(AuthContext);
