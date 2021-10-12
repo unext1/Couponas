@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
   const auth = getAuth();
 
   const [currentUser, setCurrentUser] = useState();
-  const [profileRefresh, setProfileRefresh] = useState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,23 +29,23 @@ export const AuthProvider = ({ children }) => {
         console.log("no user");
       }
     });
-    setProfileRefresh("negative");
-  }, [profileRefresh]);
+  }, []);
 
   const profileUpdate = (dN, pU) => {
-    if (currentUser.displayName !== dN || currentUser.photoURL !== pU) {
-      updateProfile(currentUser, {
-        displayName: dN,
-        photoURL: pU,
-      })
-        .then(() => {
-          setProfileRefresh("refresh");
-        })
-        .catch((error) => {
-          console.log("error :-(");
-          console.log(error);
-        });
-    }
+    let oldUser = currentUser;
+
+    setCurrentUser({ ...currentUser, displayName: dN, photoURL: pU });
+
+    updateProfile(auth.currentUser, {
+      displayName: dN,
+      photoURL: pU,
+    })
+      .then(() => {})
+      .catch((error) => {
+        console.log("error :-(");
+        console.log(error);
+        setCurrentUser(oldUser);
+      });
   };
 
   const logout = () => {

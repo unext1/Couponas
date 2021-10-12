@@ -6,11 +6,12 @@ import { AuthContext } from "../../components/auth";
 
 const AppProfile = () => {
   const { currentUser, logout, profileUpdate } = useContext(AuthContext);
-  console.log(currentUser);
+  const [displayName, setDisplayName] = useState(currentUser?.displayName);
+  const [photoUrl, setPhotoUrl] = useState(currentUser?.photoURL);
 
-  const handleProfile = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    profileUpdate(e.target.displayName.value, e.target.profilePicture.value);
+    profileUpdate(displayName, photoUrl);
   };
 
   if (!currentUser) {
@@ -114,7 +115,7 @@ const AppProfile = () => {
               </div>
               <form
                 className="space-y-8 divide-y divide-gray-200"
-                onSubmit={(e) => handleProfile(e)}
+                onSubmit={(e) => handleSubmit(e)}
               >
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                   <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
@@ -159,7 +160,8 @@ const AppProfile = () => {
                             type="text"
                             name="displayName"
                             id="displayName"
-                            defaultValue={currentUser?.displayName}
+                            onChange={(e) => setDisplayName(e.target.value)}
+                            defaultValue={currentUser.displayName}
                             autoComplete="given-name"
                             className="max-w-lg block w-full py-1 shadow-sm pl-2 focus:ring-blue-600 capitalize outline-none focus:border-blue-600 sm:max-w-xs sm:text-sm border-2 border-gray-300 rounded-md"
                           />
@@ -178,7 +180,8 @@ const AppProfile = () => {
                             type="text"
                             name="profilePicture"
                             id="profilePicture"
-                            defaultValue={currentUser?.photoURL}
+                            onChange={(e) => setPhotoUrl(e.target.value)}
+                            defaultValue={currentUser.photoURL}
                             autoComplete="given-name"
                             className="max-w-lg block w-full py-1 shadow-sm pl-2 focus:ring-blue-600  outline-none focus:border-blue-600 sm:max-w-xs sm:text-sm border-2 border-gray-300 rounded-md"
                           />
