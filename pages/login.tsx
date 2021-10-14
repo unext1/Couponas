@@ -11,7 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const auth = getAuth();
 
-  if (auth.currentUser) {
+  if (currentUser) {
     return (
       <div className="text-center">
         <h1 className="mx-auto text-2xl font-bold  py-2 uppercase text-center">

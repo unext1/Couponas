@@ -64,6 +64,7 @@ export const AuthProvider = ({ children }) => {
     signOut(auth)
       .then(() => {
         console.log("signed out");
+        setCurrentUser(undefined);
         router.push("/");
       })
       .catch((error) => {
