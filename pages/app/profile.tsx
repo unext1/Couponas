@@ -13,6 +13,9 @@ const AppProfile = () => {
     e.preventDefault();
     profileUpdate(displayName, photoUrl);
   };
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
 
   if (!currentUser) {
     return (

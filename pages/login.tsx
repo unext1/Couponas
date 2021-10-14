@@ -1,53 +1,17 @@
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
-import app from "../firebase/firebase.config";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { AuthContext } from "../components/auth";
+import { getAuth } from "firebase/auth";
 
 const Login = () => {
   const router = useRouter();
-  const auth = getAuth(app);
-  const [user, loading, error] = useAuthState(auth);
+  const { currentUser, handleLogin, googleLogin } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const auth = getAuth();
 
-  const provider = new GoogleAuthProvider();
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        router.push("/app");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error);
-      });
-  };
-
-  const googleLogin = (e) => {
-    e.preventDefault();
-
-    signInWithPopup(auth, provider)
-      .then(() => {
-        router.push("/app");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  if (user && !loading) {
+  if (auth.currentUser) {
     return (
       <div className="text-center">
         <h1 className="mx-auto text-2xl font-bold  py-2 uppercase text-center">
@@ -278,7 +242,8 @@ const Login = () => {
                 <h1 className="font-bold text-3xl text-gray-900 pt-3">LOGIN</h1>
                 <p>Enter your information to Login</p>
               </div>
-              <div>
+
+              <form onSubmit={(e) => handleLogin(e, email, password)}>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
                     <label className="text-xs font-semibold px-1">Email</label>
@@ -322,12 +287,11 @@ const Login = () => {
                 </div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
-                    <button
-                      onClick={(e) => handleLogin(e)}
+                    <input
+                      type="submit"
+                      value=" LOGIN NOW"
                       className="block w-full max-w-xs mx-auto bg-blue-600 hover:bg-purple-700 text-white rounded-lg px-3 py-3 font-semibold"
-                    >
-                      LOGIN NOW
-                    </button>
+                    />
                     <div className="w-full grid grid-cols-2 gap-2 mt-2">
                       <button
                         onClick={(e) => googleLogin(e)}
@@ -341,7 +305,7 @@ const Login = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

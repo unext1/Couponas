@@ -28,11 +28,9 @@ function App({ Component, pageProps }) {
     <>
       <AuthProvider>
         {router.route.startsWith("/app") ? (
-          <div>
-            <AppLayout>
-              <Component {...pageProps} />
-            </AppLayout>
-          </div>
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
         ) : (
           <div>
             <PublicLayout user={user}>

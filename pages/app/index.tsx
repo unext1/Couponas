@@ -17,29 +17,53 @@ const AppPage = ({ component, ...rest }) => {
           <div className="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
             <div className="flex-1 min-w-0">
               <div className="flex items-center">
-                <img
-                  className="hidden h-16 w-16 rounded-full sm:block"
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
-                  alt=""
-                />
+                {currentUser.photoURL ? (
+                  <img
+                    className="hidden h-16 w-16 rounded-full sm:block"
+                    src={currentUser.photoURL}
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    className="hidden h-16 w-16 rounded-full sm:block"
+                    src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                    alt=""
+                  />
+                )}
                 <div>
                   <div className="flex items-center">
-                    <img
-                      className="h-16 w-16 rounded-full sm:hidden"
-                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
-                      alt=""
-                    />
-                    <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
-                      Good morning, {currentUser?.displayName}
+                    {currentUser.photoURL ? (
+                      <img
+                        className="h-16 w-16 rounded-full sm:hidden"
+                        src={currentUser.photoURL}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        className="h-16 w-16 rounded-full sm:hidden"
+                        src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                        alt=""
+                      />
+                    )}
+                    <h1 className="ml-3 text-xl font-semibold leading-7 text-gray-900 sm:leading-9 sm:truncate">
+                      Good morning,
+                      <span className="ml-1 capitalize">
+                        {currentUser?.displayName
+                          ? currentUser.displayName
+                          : currentUser.email.substring(
+                              0,
+                              currentUser.email.lastIndexOf("@")
+                            )}
+                      </span>
                     </h1>
                   </div>
                   <dl className="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
                     <dt className="sr-only">Company</dt>
-                    <dd className="flex items-center text-sm text-gray-500 font-medium capitalize sm:mr-6">
+                    <dd className="flex items-center text-xs text-gray-500 font-medium capitalize sm:mr-6">
                       Duke street studio
                     </dd>
                     <dt className="sr-only">Account status</dt>
-                    <dd className="mt-3 flex items-center text-sm text-gray-500 font-medium sm:mr-6 sm:mt-0 capitalize">
+                    <dd className="mt-3 flex items-center text-xs text-gray-500 font-medium sm:mr-6 sm:mt-0 capitalize">
                       Verified account
                     </dd>
                   </dl>

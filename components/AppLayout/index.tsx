@@ -6,17 +6,17 @@ import { getAuth } from "firebase/auth";
 import { AuthContext } from "../auth";
 
 export const AppLayout: FC = ({ children }) => {
-  const { loading, currentUser } = useContext(AuthContext);
+  const auth = getAuth(app);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (!currentUser && !loading) {
+    if (!auth.currentUser) {
       router.push("/login");
     }
   }, []);
 
-  if (!currentUser) {
+  if (!auth.currentUser) {
     return <h1 className="text-gray-100">nothing to see</h1>;
   }
   return (

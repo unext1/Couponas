@@ -1,52 +1,15 @@
-import { useAuthState } from "react-firebase-hooks/auth";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
-import app from "../firebase/firebase.config";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/router";
+import { AuthContext } from "../components/auth";
 
 const Register = () => {
   const router = useRouter();
-  const auth = getAuth(app);
-  const [user, loading, error] = useAuthState(auth);
+  const { currentUser, handleSignup, googleLogin } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const provider = new GoogleAuthProvider();
-
-  console.log(user);
-
-  const handleSignup = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        router.push("/app");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
-  };
-
-  const googleLogin = (e) => {
-    e.preventDefault();
-
-    signInWithPopup(auth, provider)
-      .then(() => {
-        router.push("/app");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  if (user) {
+  if (currentUser) {
     return (
       <div className="text-center">
         <h1 className="mx-auto text-2xl font-bold  py-2 uppercase text-center">
@@ -275,7 +238,7 @@ const Register = () => {
                 </h1>
                 <p>Enter your information to Register</p>
               </div>
-              <div>
+              <form onSubmit={(e) => handleSignup(e, email, password)}>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
                     <label className="text-xs font-semibold px-1">Email</label>
@@ -314,12 +277,11 @@ const Register = () => {
                 </div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
-                    <button
-                      onClick={(e) => handleSignup(e)}
+                    <input
+                      type="submit"
+                      value="REGISTER NOW"
                       className="block w-full max-w-xs mx-auto bg-blue-600 hover:bg-purple-700 text-white rounded-lg px-3 py-3 font-semibold"
-                    >
-                      REGISTER NOW
-                    </button>
+                    />
                     <div className="w-full grid grid-cols-2 gap-2 mt-2">
                       <button
                         onClick={(e) => googleLogin(e)}
@@ -333,7 +295,7 @@ const Register = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { AuthContext } from "../auth";
 import { useContext } from "react";
 const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
+  console.log(currentUser);
   return (
     <div>
       <nav className="dark:bg-gray-800 md:block hidden">
