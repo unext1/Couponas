@@ -17,7 +17,7 @@ import { AuthContext } from "../auth";
 const navigation = [
   { name: "Dashboard", href: "/app", icon: HomeIcon },
   { name: "Profile", href: "/app/profile", icon: UsersIcon },
-  { name: "Projects", href: "#", icon: FolderIcon },
+  { name: "Projects", href: "/app/projects", icon: FolderIcon },
   { name: "Calendar", href: "#", icon: CalendarIcon },
   { name: "Documents", href: "#", icon: InboxIcon },
   { name: "Reports", href: "#", icon: ChartBarIcon },
@@ -30,7 +30,7 @@ export default function Navbar() {
   const { currentUser } = useContext(AuthContext);
 
   if (!currentUser) {
-    return <h1>Loading...</h1>;
+    return null;
   }
   return (
     <div className="h-screen flex overflow-hidden bg-gray-100">

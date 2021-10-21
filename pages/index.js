@@ -5,6 +5,8 @@ import { AuthContext } from "../components/auth";
 export default function Home() {
   const { currentUser } = useContext(AuthContext);
 
+  console.log(currentUser);
+
   return (
     <div>
       <header className="dark:bg-gray-800 ">

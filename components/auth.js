@@ -31,8 +31,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentUser(user);
+        setCurrentUser(currentUser);
         setLoading(false);
+        console.log(currentUser);
       } else {
         console.log("no user");
       }
@@ -47,12 +48,15 @@ export const AuthProvider = ({ children }) => {
       displayName: dN,
       photoURL: pU,
     });
+    console.log(currentUser);
 
     updateProfile(auth.currentUser, {
       displayName: dN,
       photoURL: pU,
     })
-      .then(() => {})
+      .then(() => {
+        console.log(currentUser);
+      })
       .catch((error) => {
         console.log("error :-(");
         console.log(error);
@@ -64,7 +68,8 @@ export const AuthProvider = ({ children }) => {
     signOut(auth)
       .then(() => {
         console.log("signed out");
-        setCurrentUser(undefined);
+        setCurrentUser(null);
+        console.log("loggedout" + currentUser);
         router.push("/");
       })
       .catch((error) => {
@@ -74,13 +79,13 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogin = (e, email, password) => {
     e.preventDefault();
-    router.push("/app");
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        setCurrentUser(userCredential.user);
+        console.log("logged in", user);
         router.push("/app");
-        console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -91,16 +96,19 @@ export const AuthProvider = ({ children }) => {
 
   const handleSignup = (e, email, password) => {
     e.preventDefault();
-    router.push("/app");
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        setCurrentUser(userCredential.user);
+
+        console.log("registered", user);
         router.push("/app");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage);
       });
   };
 
@@ -108,7 +116,8 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
 
     signInWithPopup(auth, provider)
-      .then(() => {
+      .then((user) => {
+        setCurrentUser(user.user);
         router.push("/app");
       })
       .catch((error) => {
