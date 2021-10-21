@@ -77,7 +77,7 @@ const Projects = () => {
         </div>
         <h1>QR CODE WEB</h1>
         <QrReader
-          delay={300}
+          facingMode="rear"
           style={{ width: "50%" }}
           onError={handleErrorCam}
           onSacn={handleScanCam}
