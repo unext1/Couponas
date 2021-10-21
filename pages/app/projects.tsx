@@ -75,13 +75,13 @@ const Projects = () => {
           )}
         </div>
         <h1>QR CODE WEB</h1>
-        <QrReader
+        {/* <QrReader
           facingMode="rear"
           style={{ width: "40%" }}
           onError={handleErrorCam}
           onScan={handleScanCam}
         />
-        <h1>Scanned by Cam code: {camResults && camResults}</h1>
+        <h1>Scanned by Cam code: {camResults && camResults}</h1> */}
       </div>
     </div>
   );
