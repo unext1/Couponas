@@ -24,14 +24,13 @@ const Projects = () => {
   };
 
   const handleErrorCam = (error) => {
-    console.log(error);
+    console.log("errorororo");
   };
 
   const handleScanCam = (result) => {
     if (result) {
-      setCamResults(result);
+      setCamResults(result.text);
     }
-    console.log(result);
   };
 
   return (
@@ -78,9 +77,9 @@ const Projects = () => {
         <h1>QR CODE WEB</h1>
         <QrReader
           facingMode="rear"
-          style={{ width: "50%" }}
+          style={{ width: "40%" }}
           onError={handleErrorCam}
-          onSacn={handleScanCam}
+          onScan={handleScanCam}
         />
         <h1>Scanned by Cam code: {camResults && camResults}</h1>
       </div>
