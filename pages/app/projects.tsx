@@ -1,13 +1,18 @@
 import QRcode from "qrcode";
 import QrReader from "react-qr-scanner";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const Projects = () => {
   const [qrCode, setQrCode] = useState();
   const [text, setText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [camResults, setCamResults] = useState();
-  const qrRef = useRef(null);
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const generateQrCode = async () => {
     try {
@@ -29,7 +34,7 @@ const Projects = () => {
 
   const handleScanCam = (result) => {
     if (result) {
-      setCamResults(result.text);
+      setCamResults(result?.text);
     }
   };
 
@@ -75,13 +80,14 @@ const Projects = () => {
           )}
         </div>
         <h1>QR CODE WEB</h1>
-        {/* <QrReader
-          facingMode="rear"
-          style={{ width: "40%" }}
-          onError={handleErrorCam}
-          onScan={handleScanCam}
-        />
-        <h1>Scanned by Cam code: {camResults && camResults}</h1> */}
+        {/* {mounted && (
+          <QrReader
+            delay={500}
+            onError={handleErrorCam}
+            onScan={handleScanCam}
+          />
+        )} */}
+        <h1>Scanned by Cam code: {camResults && camResults}</h1>
       </div>
     </div>
   );
