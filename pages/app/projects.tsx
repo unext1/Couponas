@@ -24,6 +24,8 @@ const Projects = () => {
       console.log(error.message);
       if (error.message == "No input text") {
         setErrorMessage("Please enter something before generating qr code");
+      } else {
+        setErrorMessage("Error");
       }
     }
   };
