@@ -8,16 +8,9 @@ const Projects = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [camResults, setCamResults] = useState();
 
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const generateQrCode = async () => {
     try {
       const response = await QRcode.toDataURL(text);
-      console.log(response);
       setQrCode(response);
       setErrorMessage("");
     } catch (error) {
@@ -40,42 +33,94 @@ const Projects = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    generateQrCode();
+    console.log(e.target.elements.recepentsName.value); // from elements property
+    console.log(e.target.amount.value);
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-6">
       <h1 className="text-2xl font-semibold text-gray-900">Project</h1>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-          <label
-            htmlFor="QrCode"
-            className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-          >
-            Your Qr Code
-          </label>
-          <div className="mt-1 sm:mt-0 sm:col-span-2">
-            <input
-              name="QrCode"
-              type="QrCode"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              className="max-w-lg block w-full py-1 shadow-sm pl-2 focus:ring-blue-600  outline-none focus:border-blue-600 sm:max-w-xs sm:text-sm border-2 border-gray-300 rounded-md"
-            />
-            {errorMessage && (
-              <p className="text-red-600 mt-2">{errorMessage}</p>
-            )}
+      <div className="grid grid-cols-2 sm:gap-4 sm:pt-5">
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="grid grid-cols-3 gap-5">
+            <div className="col-span-2">
+              <label className="block text-gray-800 font-bold">
+                Recepents Name:
+              </label>
+              <input
+                type="text"
+                name="recepentsName"
+                placeholder="Recepents Name"
+                className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
+              />
+            </div>
+            <div className="col-span-1">
+              <label className="block text-gray-800 font-bold">Amount:</label>
+              <input
+                name="amount"
+                type="tel"
+                value={text}
+                onChange={
+                  (event) => setText(event.target.value.replace(/\D/, ""))
+                  // setText(event.target.value)
+                }
+                placeholder="$"
+                className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
+              />
+            </div>
           </div>
-        </div>
-        <input
-          type="submit"
-          value="Generate qr"
-          onClick={() => generateQrCode()}
-          className="mt-5 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        />
+          <div className="mt-2">
+            <label className="block text-gray-800 font-bold">
+              Recepents Email:
+            </label>
+            <input
+              name="recepentsEmail"
+              type="email"
+              placeholder="RecepentsEmail"
+              className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
+            />
+          </div>
+          <div className="mt-2 ">
+            <label className="block text-gray-800 font-bold">Message:</label>
+            <textarea
+              name="message"
+              placeholder="<3"
+              className="w-full border border-gray-300 py-2 pl-3 h-24 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
+            />
+          </div>
+
+          <input
+            type="submit"
+            value="Generate qr"
+            className="mt-5 inline-flex justify-center py-2 px-4 w-full border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          />
+          {errorMessage && <p className="text-red-600 mt-2">{errorMessage}</p>}
+        </form>
         {qrCode && (
-          <a href={qrCode} download>
-            <img className="mt-5 w-52 h-52 object-cover" src={qrCode} />
-          </a>
+          <div className="mt-8 mx-auto">
+            <div className="max-w-sm bg-white p-5 rounded-md tracking-wide shadow-lg">
+              <div className="mb-4">
+                <a href={qrCode} download>
+                  <img
+                    className="w-82 mx-auto h-52 object-cover"
+                    src={qrCode}
+                  />
+                </a>
+              </div>
+              <div id="quote">
+                <q className="italic text-gray-600">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </q>
+              </div>
+            </div>
+          </div>
         )}
-      </form>
+      </div>
+
       {/* <h1>QR CODE WEB</h1>
         {mounted && (
           <QrReader
