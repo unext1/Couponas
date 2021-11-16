@@ -7,6 +7,11 @@ const Projects = () => {
   const [text, setText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [camResults, setCamResults] = useState();
+  const [recepentsName, setRecepentsName] = useState();
+  const [recepentsEmail, setRecepentsEmail] = useState();
+  const [amount, setAmount] = useState();
+
+  const [messege, setMessege] = useState();
 
   const generateQrCode = async () => {
     try {
@@ -32,12 +37,18 @@ const Projects = () => {
       setCamResults(result?.text);
     }
   };
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "SEK",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     generateQrCode();
-    console.log(e.target.elements.recepentsName.value); // from elements property
-    console.log(e.target.amount.value);
+    setRecepentsEmail(e.target.elements.recepentsEmail.value);
+    setRecepentsName(e.target.elements.recepentsName.value);
+    setAmount(e.target.amount.value);
+    setMessege(e.target.message.value);
   };
 
   return (
@@ -110,11 +121,14 @@ const Projects = () => {
                   />
                 </a>
               </div>
-              <div id="quote">
-                <q className="italic text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </q>
+              <div className="flex justify-between">
+                <h1 className="text-lg font-bold pr-5">{recepentsName}</h1>
+                <h1 className="text-base my-auto">
+                  {formatter.format(amount)}
+                </h1>
+              </div>
+              <div id="quote mt-10">
+                - <q className="italic text-gray-600">{messege}</q>
               </div>
             </div>
           </div>
