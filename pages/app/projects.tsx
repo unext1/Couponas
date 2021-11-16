@@ -1,14 +1,17 @@
 import QRcode from "qrcode";
 import QrReader from "react-qr-scanner";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
+import { AuthContext } from "../../components/auth";
 
 const Projects = () => {
+  const { currentUser, logout, profileUpdate } = useContext(AuthContext);
+
   const [qrCode, setQrCode] = useState();
   const [text, setText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [camResults, setCamResults] = useState();
-  const [recepentsName, setRecepentsName] = useState();
-  const [recepentsEmail, setRecepentsEmail] = useState();
+  const [recepentsName, setRecepentsName] = useState(currentUser.displayName);
+  const [recepentsEmail, setRecepentsEmail] = useState(currentUser.email);
   const [amount, setAmount] = useState();
 
   const [messege, setMessege] = useState();
@@ -65,6 +68,7 @@ const Projects = () => {
                 type="text"
                 name="recepentsName"
                 placeholder="Recepents Name"
+                defaultValue={currentUser.displayName}
                 className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
               />
             </div>
@@ -91,6 +95,7 @@ const Projects = () => {
               name="recepentsEmail"
               type="email"
               placeholder="RecepentsEmail"
+              defaultValue={currentUser.email}
               className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
             />
           </div>
@@ -111,9 +116,9 @@ const Projects = () => {
           {errorMessage && <p className="text-red-600 mt-2">{errorMessage}</p>}
         </form>
         {qrCode && (
-          <div className="mt-8 mx-auto">
-            <div className="max-w-sm bg-white p-5 rounded-md tracking-wide shadow-lg">
-              <div className="mb-4">
+          <div className="max-w-sm mt-8 mx-auto">
+            <div className="rounded tracking-wide shadow-lg">
+              <div className="mb-4 p-5 py-10 bg-indigo-600 ">
                 <a href={qrCode} download>
                   <img
                     className="w-82 mx-auto h-52 object-cover"
@@ -121,14 +126,16 @@ const Projects = () => {
                   />
                 </a>
               </div>
-              <div className="flex justify-between">
-                <h1 className="text-lg font-bold pr-5">{recepentsName}</h1>
-                <h1 className="text-base my-auto">
-                  {formatter.format(amount)}
-                </h1>
-              </div>
-              <div id="quote mt-10">
-                - <q className="italic text-gray-600">{messege}</q>
+              <div className="p-5 bg-white">
+                <div className="flex justify-between ">
+                  <h1 className="text-lg font-bold pr-5">{recepentsName}</h1>
+                  <h1 className="text-base my-auto">
+                    {formatter.format(amount)}
+                  </h1>
+                </div>
+                <div id="quote mt-20">
+                  - <q className="italic text-gray-600">{messege}</q>
+                </div>
               </div>
             </div>
           </div>
