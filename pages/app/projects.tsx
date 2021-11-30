@@ -116,7 +116,7 @@ const Projects = () => {
           {errorMessage && <p className="text-red-600 mt-2">{errorMessage}</p>}
         </form>
         {qrCode && (
-          <div className="max-w-sm mt-8 mx-auto">
+          <div className="max-w-sm mx-auto">
             <div className="rounded tracking-wide shadow-lg">
               <div className="mb-4 p-5 py-10 bg-indigo-600 ">
                 <a href={qrCode} download>
