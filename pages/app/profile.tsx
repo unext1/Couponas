@@ -57,7 +57,7 @@ const AppProfile = () => {
                     </div>
 
                     <div className="ml-4">
-                      <h3 className="text-lg leading-6 font-medium text-gray-900 capitalize">
+                      <h3 className="text-lg leading-6 font-medium text-gray-900 ">
                         {currentUser?.displayName
                           ? currentUser.displayName
                           : currentUser.email.substring(
@@ -146,7 +146,7 @@ const AppProfile = () => {
                             placeholder={currentUser?.email}
                             autoComplete="email"
                             readOnly
-                            className="max-w-lg block w-full py-1 shadow-sm pl-2 focus:ring-blue-600 capitalize outline-none focus:border-blue-600 sm:max-w-xs sm:text-sm border-2 border-gray-300 rounded-md"
+                            className="max-w-lg block w-full py-1 shadow-sm pl-2 focus:ring-blue-600  outline-none focus:border-blue-600 sm:max-w-xs sm:text-sm border-2 border-gray-300 rounded-md"
                           />
                         </div>
                       </div>

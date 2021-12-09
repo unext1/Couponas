@@ -1,5 +1,4 @@
 import QRcode from "qrcode";
-import QrReader from "react-qr-scanner";
 import { useState, useRef, useEffect, useContext } from "react";
 import { AuthContext } from "../../components/auth";
 
@@ -31,15 +30,6 @@ const Projects = () => {
     }
   };
 
-  const handleErrorCam = (error) => {
-    console.log("errorororo");
-  };
-
-  const handleScanCam = (result) => {
-    if (result) {
-      setCamResults(result?.text);
-    }
-  };
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "SEK",
@@ -142,15 +132,21 @@ const Projects = () => {
         )}
       </div>
 
-      {/* <h1>QR CODE WEB</h1>
-        {mounted && (
-          <QrReader
-            delay={500}
-            onError={handleErrorCam}
-            onScan={handleScanCam}
-          />
-        )}
-        <h1>Scanned by Cam code: {camResults && camResults}</h1> */}
+      <div className="max-w-md mt-10">
+        <label className="block text-gray-800 font-bold">QR:</label>
+        <input
+          name="qr"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
+        />
+        <button
+          className="mt-5 inline-flex justify-center py-2 px-4 w-full border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          onClick={() => generateQrCode()}
+        >
+          Generate qr
+        </button>
+      </div>
     </div>
   );
 };

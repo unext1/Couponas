@@ -18,9 +18,8 @@ const navigation = [
   { name: "Dashboard", href: "/app", icon: HomeIcon },
   { name: "Profile", href: "/app/profile", icon: UsersIcon },
   { name: "Projects", href: "/app/projects", icon: FolderIcon },
-  { name: "Calendar", href: "#", icon: CalendarIcon },
+  { name: "Scanner", href: "/app/scanner", icon: ChartBarIcon },
   { name: "Documents", href: "#", icon: InboxIcon },
-  { name: "Reports", href: "#", icon: ChartBarIcon },
 ];
 
 export default function Navbar() {
@@ -83,11 +82,9 @@ export default function Navbar() {
               </Transition.Child>
               <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
                 <div className="flex-shrink-0 flex items-center px-4">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                    alt="Workflow"
-                  />
+                  <h1 className="text-white text-2xl tracking-wider font-semibold">
+                    COUPONAS
+                  </h1>
                 </div>
                 <nav className="mt-5 px-2 space-y-1">
                   {navigation.map((item) => (
@@ -160,11 +157,9 @@ export default function Navbar() {
           <div className="flex-1 flex flex-col min-h-0">
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
               <div className="flex items-center flex-shrink-0 px-4">
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                  alt="Workflow"
-                />
+                <h1 className="text-white text-2xl tracking-wider font-semibold">
+                  COUPONAS
+                </h1>
               </div>
               <nav className="mt-5 flex-1 px-2 space-y-1">
                 {navigation.map((item) => (
