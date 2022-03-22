@@ -19,7 +19,6 @@ const navigation = [
   { name: "Profile", href: "/app/profile", icon: UsersIcon },
   { name: "Projects", href: "/app/projects", icon: FolderIcon },
   { name: "Scanner", href: "/app/scanner", icon: ChartBarIcon },
-  { name: "Documents", href: "#", icon: InboxIcon },
 ];
 
 export default function Navbar() {
@@ -32,7 +31,7 @@ export default function Navbar() {
     return null;
   }
   return (
-    <div className="h-screen flex overflow-hidden bg-gray-100">
+    <div className="h-screen flex overflow-hidden from-blue-600 via-blue-600 to-purple-700">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -83,7 +82,7 @@ export default function Navbar() {
               <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
                 <div className="flex-shrink-0 flex items-center px-4">
                   <h1 className="text-white text-2xl tracking-wider font-semibold">
-                    COUPONAS
+                    Q-Pong
                   </h1>
                 </div>
                 <nav className="mt-5 px-2 space-y-1">
@@ -93,12 +92,12 @@ export default function Navbar() {
                       href={item.href}
                       className={
                         router.asPath == item.href
-                          ? "bg-blue-800 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                          : "text-white hover:bg-blue-700 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                          ? "bg-indigo-600 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                          : "text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
                       }
                     >
                       <item.icon
-                        className="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300"
+                        className="mr-4 flex-shrink-0 h-6 w-6 text-white"
                         aria-hidden="true"
                       />
                       {item.name}
@@ -152,27 +151,27 @@ export default function Navbar() {
         </Dialog>
       </Transition.Root>
 
-      <div className="hidden bg-gradient-to-b from-blue-600 via-blue-600 to-purple-700 md:flex md:flex-shrink-0">
+      <div className="hidden bg-gradient-to-b bg-purple-600 md:flex md:flex-shrink-0">
         <div className="flex flex-col w-64">
           <div className="flex-1 flex flex-col min-h-0">
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
               <div className="flex items-center flex-shrink-0 px-4">
                 <h1 className="text-white text-2xl tracking-wider font-semibold">
-                  COUPONAS
+                  Q-Pong
                 </h1>
               </div>
-              <nav className="mt-5 flex-1 px-2 space-y-1">
+              <nav className="mt-5 flex-1 px-2 space-y-2">
                 {navigation.map((item) => (
                   <Link href={item.href} key={item.name}>
                     <a
                       className={
                         router.asPath == item.href
-                          ? "bg-blue-800 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                          : "text-white hover:bg-blue-700 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                          ? "bg-indigo-600 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                          : "text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
                       }
                     >
                       <item.icon
-                        className="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300"
+                        className="mr-3 flex-shrink-0 h-6 w-6 text-white"
                         aria-hidden="true"
                       />
                       {item.name}

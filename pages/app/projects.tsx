@@ -132,7 +132,7 @@ const Projects = () => {
         )}
       </div>
 
-      <div className="max-w-md mt-10">
+      {/* <div className="max-w-md mt-10">
         <label className="block text-gray-800 font-bold">QR:</label>
         <input
           name="qr"
@@ -146,7 +146,7 @@ const Projects = () => {
         >
           Generate qr
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -11,7 +11,7 @@ const Register = () => {
 
   if (currentUser) {
     return (
-      <div className="text-center">
+      <div className="text-center text-white mt-20">
         <h1 className="mx-auto text-2xl font-bold  py-2 uppercase text-center">
           You already logged in silly !
         </h1>
@@ -23,10 +23,10 @@ const Register = () => {
   }
   return (
     <>
-      <div className="flex items-center justify-center container mx-auto my-auto px-5 py-5 pb-20">
+      <div className="flex items-center justify-center container mx-auto my-auto px-5 py-5 pb-20 mt-20">
         <div className="text-gray-500 rounded-3xl max-w-5xl shadow-xl w-full overflow-hidden">
           <div className="md:flex w-full">
-            <div className="hidden md:block w-1/2 bg-gradient-to-r from-blue-600 to-purple-700  py-10 px-10">
+            <div className="hidden md:block w-1/2 bg-gradient-to-r bg-red-600  py-10 px-10">
               <svg
                 id="a87032b8-5b37-4b7e-a4d9-4dbfbe394641"
                 data-name="Layer 1"
@@ -231,24 +231,27 @@ const Register = () => {
                 />
               </svg>
             </div>
-            <div className="w-full md:w-1/2 py-5 px-5 md:px-10 bg-white">
+            <div className="w-full md:w-1/2 py-5 px-5 md:px-10 bg-brand-gray-900">
               <div className="text-center pb-10">
-                <h1 className="font-bold text-3xl text-gray-900 pt-3">
-                  REGISTER
-                </h1>
-                <p>Enter your information to Register</p>
+                <h1 className="font-bold text-3xl text-white pt-3">REGISTER</h1>
+                <p className="text-gray-400">
+                  Enter your information to Register
+                </p>
               </div>
               <form onSubmit={(e) => handleSignup(e, email, password)}>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
-                    <label className="text-xs font-semibold px-1">Email</label>
+                    <label className="text-xs uppercase px-1 text-gray-400">
+                      {" "}
+                      Email
+                    </label>
                     <div className="flex">
                       <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                         <i className="mdi mdi-email-outline text-gray-400 text-lg"></i>
                       </div>
                       <input
                         type="email"
-                        className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-red-600"
                         placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -258,7 +261,7 @@ const Register = () => {
                 </div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-12">
-                    <label className="text-xs font-semibold px-1">
+                    <label className="text-xs uppercase px-1 text-gray-400">
                       Password
                     </label>
                     <div className="flex">
@@ -267,7 +270,7 @@ const Register = () => {
                       </div>
                       <input
                         type="password"
-                        className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-red-600"
                         placeholder="************"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -280,7 +283,7 @@ const Register = () => {
                     <input
                       type="submit"
                       value="REGISTER NOW"
-                      className="block w-full max-w-xs mx-auto bg-blue-600 hover:bg-purple-700 text-white rounded-lg px-3 py-3 font-semibold"
+                      className="block w-full max-w-xs mx-auto bg-red-600 hover:bg-red-700 text-white rounded-lg px-3 py-3 font-semibold"
                     />
                     <div className="w-full grid grid-cols-2 gap-2 mt-2">
                       <button
@@ -289,7 +292,7 @@ const Register = () => {
                       >
                         Google
                       </button>
-                      <button className="block w-full mx-auto bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-3 py-3 font-semibold">
+                      <button className="block w-full mx-auto bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-3 py-3 font-semibold">
                         Facebook
                       </button>
                     </div>

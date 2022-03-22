@@ -1,120 +1,155 @@
+import { Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import {
+  CalendarIcon,
+  ChartBarIcon,
+  FolderIcon,
+  HomeIcon,
+  InboxIcon,
+  MenuIcon,
+  UsersIcon,
+  XIcon,
+} from "@heroicons/react/outline";
 import Link from "next/link";
-import { AuthContext } from "../auth";
-import { useContext } from "react";
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 const Navbar = () => {
-  const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
+  const navigation = [
+    { name: "Home", href: "/", icon: HomeIcon },
+    { name: "Contact", href: "/contact", icon: UsersIcon },
+    { name: "Login", href: "/login", icon: MenuIcon },
+  ];
+
+  const router = useRouter();
+
   return (
-    <div>
-      <nav className="dark:bg-gray-800 md:block hidden">
-        <div className="container p-6 mx-auto">
-          <Link href="/">
-            <a className="block text-2xl font-bold text-center text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300">
-              Couponas
-            </a>
-          </Link>
-          <div className="flex items-center justify-center mt-6 text-gray-600 capitalize dark:text-gray-300">
-            <Link href="/">
-              <a className="text-gray-800 dark:text-gray-200 border-b-2 border-blue-600 mx-1.5 sm:mx-6">
-                home
-              </a>
-            </Link>
-            <a
-              href="#"
-              className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-600 mx-1.5 sm:mx-6"
-            >
-              features
-            </a>
-
-            <a
-              href="#"
-              className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-600 mx-1.5 sm:mx-6"
-            >
-              pricing
-            </a>
-
-            <a
-              href="#"
-              className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-600 mx-1.5 sm:mx-6"
-            >
-              blog
-            </a>
-
-            {currentUser ? (
-              <div className="flex">
-                <Link href="/app">
-                  <a className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-600 mx-1.5 sm:mx-6">
-                    Go to app
+    <div className="relative z-10 ">
+      <div className="fixed hidden h-full md:flex">
+        <div className="flex flex-col flex-1 px-5 border-r-2 border-brand-dark-700 bg-brand-dark-900 ">
+          <div className="flex flex-col flex-1 pt-6 overflow-y-auto">
+            <div className="mx-auto cursor-pointer">
+              <Link href="/">
+                <motion.h1
+                  whileTap={{ scale: 1.1, rotate: 0 }}
+                  whileHover={{ rotate: 10, scale: 0.9 }}
+                  className="text-5xl font-semibold tracking-wider text-transparent uppercase bg-clip-text bg-gradient-to-b from-red-500 to-blue-700 via-red-500"
+                  style={{ lineHeight: 1.1 }}
+                >
+                  Q
+                </motion.h1>
+                {/* <a>
+                  <motion.img
+                    whileTap={{ scale: 1.1, rotate: 0 }}
+                    whileHover={{ rotate: 10, scale: 0.9 }}
+                    src="/icon1.webp"
+                    className="w-12 h-12 text-white"
+                    style={{ filter: "invert(100%) " }}
+                  />
+                </a> */}
+              </Link>
+            </div>
+            <nav className="mt-5 flex-1 space-y-2.5 ">
+              {navigation.map((item) => (
+                <Link key={item.name} href={item.href}>
+                  <a className="flex group">
+                    <div className="sidebar-tooltip group-hover:scale-100 my-auto mt-1.5 z-50 ">
+                      {item.name}
+                    </div>
+                    <motion.div
+                      whileTap={{ scale: 0.8 }}
+                      className={classNames(
+                        router.asPath == item.href
+                          ? "bg-red-500 text-white "
+                          : "text-neutral-500 hover:bg-red-500 hover:text-white ",
+                        "group flex items-center px-3 py-2.5 text-sm rounded-xl "
+                      )}
+                    >
+                      <item.icon
+                        className={classNames(
+                          router.asPath == item.href
+                            ? "text-white"
+                            : "text-neutral-500 group-hover:text-white",
+                          "flex-shrink-0 h-6 w-6"
+                        )}
+                        aria-hidden="true"
+                      />
+                    </motion.div>
                   </a>
                 </Link>
-              </div>
-            ) : (
-              <Link href="/login">
-                <a className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-600 mx-1.5 sm:mx-6">
-                  Login
-                </a>
-              </Link>
-            )}
+              ))}
+            </nav>
           </div>
         </div>
-      </nav>
-      <div className="flex items-center justify-center px-2 w-full fixed md:hidden bottom-2">
+      </div>
+
+      {/* MOBILE NAV */}
+      <div className="fixed flex items-center justify-center w-full p-5 md:hidden bottom-5 ">
         <div className="w-full max-w-md mx-auto ">
-          <div className="bg-white shadow-lg rounded-xl">
+          <div className="rounded-full shadow-2xl bg-brand-dark-600 bg-opacity-90 ">
             <div className="flex py-2">
-              <div className="flex-1 group">
-                <a
-                  href="#"
-                  className="flex items-end justify-center text-center mx-auto px-2 pt-1 w-full text-gray-400 group-hover:text-indigo-500"
-                >
-                  <span className="block px-1 my-auto">
-                    <i className="fa fa-home text-xl block"></i>
-                    <span className="block text-xs">Home</span>
-                    <span className="block w-full mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                  </span>
-                </a>
+              <div className="flex justify-around w-full px-5 my-auto">
+                {/* <div className="group">
+                  <Link href="/">
+                    <a className="flex items-end justify-center w-full text-center text-neutral-700 group-hover:text-red-500">
+                      <CalendarIcon className="flex items-center w-6 h-6" />
+                    </a>
+                  </Link>
+                </div> */}
+                <div className="group">
+                  <Link href="/contact">
+                    <a
+                      className={`flex items-end justify-center w-full text-center  ${
+                        router.pathname == "/contact"
+                          ? "text-red-500"
+                          : "text-neutral-400"
+                      }`}
+                    >
+                      <span className="sr-only">Contact</span>
+                      <UsersIcon className="flex items-center w-6 h-6" />
+                    </a>
+                  </Link>
+                </div>
               </div>
-              <div className="flex-1 group mx-auto flex">
-                <a
-                  href="#"
-                  className="flex items-end justify-center text-center mx-auto px-2 pt-1 w-full text-gray-400 group-hover:text-indigo-500"
-                >
-                  <span className="block px-1 my-auto">
-                    <i className="fa fa-compass text-xl block"></i>
-                    <span className="block text-xs">Explore</span>
-                    <span className="block w-full mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                  </span>
-                </a>
-              </div>
-              <div className="flex-1 group w-full h-full px- my-auto mx-auto flex justify-center cursor-pointer outline-none">
+              <div className="flex justify-center flex-1 w-full h-full mx-auto my-auto outline-none cursor-pointer group">
                 <Link href="/">
-                  <div className="h-12 w-12 bg-indigo-700 rounded-full text-center my-auto">
-                    <i className="fa fa-home text-2xl text-white my-auto mt-2"></i>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex-1 group">
-                <a
-                  href="#"
-                  className="flex items-end justify-center text-center mx-auto px-2 pt-1 w-full text-gray-400 group-hover:text-indigo-500"
-                >
-                  <span className="block px-1 my-auto">
-                    <i className="fa fa-search text-xl block"></i>
-                    <span className="block text-xs">Search</span>
-                    <span className="block w-full mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                  </span>
-                </a>
-              </div>
-              <div className="flex-1 group">
-                <Link href="/login">
-                  <a className="flex items-end justify-center text-center mx-auto px-2 pt-1 w-full text-gray-400 group-hover:text-indigo-500">
-                    <span className="block px-1 my-auto">
-                      <i className="fa fa-cog text-xl block"></i>
-                      <span className="block text-xs">Login</span>
-                      <span className="block w-full mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                    </span>
+                  <a>
+                    <motion.div
+                      whileTap={{ scale: 0.8 }}
+                      transition={{ duration: 0.1 }}
+                      className="w-12 h-12 my-auto text-center bg-red-500 rounded-full"
+                    >
+                      <span className="sr-only">Home</span>
+                      <HomeIcon className="flex items-center w-full h-full p-2.5 mx-auto text-white" />
+                    </motion.div>
                   </a>
                 </Link>
+              </div>
+              <div className="flex justify-around w-full px-5 my-auto ">
+                <div className="group">
+                  <Link href="/blog">
+                    <a
+                      className={`flex items-end justify-center w-full text-center  ${
+                        router.pathname == "/blog"
+                          ? "text-red-500"
+                          : "text-neutral-400"
+                      }`}
+                    >
+                      <span className="sr-only">Blog</span>
+                      <FolderIcon className="flex items-center w-6 h-6" />
+                    </a>
+                  </Link>
+                </div>
+                {/* <div className="group">
+                  <Link href="/">
+                    <a className="flex items-end justify-center w-full text-center text-neutral-700 group-hover:text-red-500">
+                      <InboxIcon className="flex items-center w-6 h-6" />
+                    </a>
+                  </Link>
+                </div> */}
               </div>
             </div>
           </div>
@@ -125,3 +160,49 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+{
+  /* <div className="hidden md:flex w-80">
+<div className="flex flex-col flex-1 min-h-0 px-5 border-r-2 border-brand-dark-700 bg-brand-dark-900 ">
+  <div className="flex flex-col flex-1 pt-6 overflow-y-auto">
+    <motion.div whileTap={{ scale: 1.2 }} className="mx-auto mb-3">
+      <Link href="/">
+        <a>
+          <img
+            src="/icon1.webp"
+            className="h-16 text-white"
+            style={{ filter: "invert(100%) " }}
+          />
+        </a>
+      </Link>
+    </motion.div>
+    <nav className="mt-5 flex-1 space-y-2.5">
+      {navigation.map((item) => (
+        <Link key={item.name} href={item.href}>
+          <a
+            className={classNames(
+              router.asPath == item.href
+                ? "bg-red-500 text-white "
+                : "text-neutral-700 hover:bg-red-500 hover:text-white ",
+              "group flex items-center px-3 py-2.5 text-sm rounded-md "
+            )}
+          >
+            <item.icon
+              className={classNames(
+                router.asPath == item.href
+                  ? "text-white"
+                  : "text-neutral-700 group-hover:text-white",
+                "mr-3 flex-shrink-0 h-6 w-6"
+              )}
+              aria-hidden="true"
+            />
+            {item.name}
+          </a>
+        </Link>
+      ))}
+    </nav>
+  </div>
+  <div className="flex flex-shrink-0 p-4"></div>
+</div>
+</div> */
+}

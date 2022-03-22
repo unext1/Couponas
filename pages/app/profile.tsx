@@ -214,6 +214,16 @@ const AppProfile = () => {
               </form>
             </div>
           </div>
+          <div>Example urls:</div>
+          <p className="text-xs">
+            https://i.pinimg.com/originals/df/ef/52/dfef52bc718c0e35ded5ad5eb80da4bb.jpg{" "}
+          </p>
+          <p className="text-xs">
+            https://preview.redd.it/qeq7lgud5po51.jpg?auto=webp&s=a3a9534425966bc6293fc1982b026af46a1255f2{" "}
+          </p>{" "}
+          <p className="text-xs">
+            https://i.pinimg.com/550x/4f/0a/dc/4f0adc98a0989dbe26c3bf970bf4077a.jpg{" "}
+          </p>{" "}
         </div>
       </div>
     </>

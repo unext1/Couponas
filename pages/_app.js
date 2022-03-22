@@ -16,7 +16,7 @@ function App({ Component, pageProps }) {
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center bg-gray-100">
-        <div className="loader bg-purple-500 p-5 rounded-full flex space-x-3">
+        <div className="loader bg-brand-dark-900 p-5 rounded-full flex space-x-3">
           <div className="w-5 h-5 bg-gray-100 rounded-full animate-bounce"></div>
           <div className="w-5 h-5 bg-gray-100 rounded-full animate-bounce"></div>
           <div className="w-5 h-5 bg-gray-100 rounded-full animate-bounce"></div>
