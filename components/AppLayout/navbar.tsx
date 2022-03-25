@@ -31,11 +31,11 @@ export default function Navbar() {
     return null;
   }
   return (
-    <div className="h-screen flex overflow-hidden from-blue-600 via-blue-600 to-purple-700">
+    <div className="flex h-screen overflow-hidden from-blue-600 via-blue-600 to-purple-700">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 flex z-40 md:hidden"
+          className="fixed inset-0 z-40 flex md:hidden"
           onClose={setSidebarOpen}
         >
           <Transition.Child
@@ -58,7 +58,7 @@ export default function Navbar() {
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <div className="relative flex-1 flex flex-col max-w-xs w-full bg-gradient-to-b from-blue-600 via-blue-600 to-purple-700">
+            <div className="relative flex flex-col flex-1 w-full max-w-xs bg-gradient-to-b from-blue-600 via-blue-600 to-purple-700">
               <Transition.Child
                 as={Fragment}
                 enter="ease-in-out duration-300"
@@ -68,24 +68,24 @@ export default function Navbar() {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div className="absolute top-0 right-0 -mr-12 pt-2">
+                <div className="absolute top-0 right-0 pt-2 -mr-12">
                   <button
                     type="button"
-                    className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                    className="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                     onClick={() => setSidebarOpen(false)}
                   >
                     <span className="sr-only">Close sidebar</span>
-                    <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                    <XIcon className="w-6 h-6 text-white" aria-hidden="true" />
                   </button>
                 </div>
               </Transition.Child>
               <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-                <div className="flex-shrink-0 flex items-center px-4">
-                  <h1 className="text-white text-2xl tracking-wider font-semibold">
-                    Q-Pong
+                <div className="flex items-center flex-shrink-0 px-4">
+                  <h1 className="text-2xl font-semibold tracking-wider text-white">
+                    <Link href="/">Q-Pong</Link>
                   </h1>
                 </div>
-                <nav className="mt-5 px-2 space-y-1">
+                <nav className="px-2 mt-5 space-y-1">
                   {navigation.map((item) => (
                     <a
                       key={item.name}
@@ -97,7 +97,7 @@ export default function Navbar() {
                       }
                     >
                       <item.icon
-                        className="mr-4 flex-shrink-0 h-6 w-6 text-white"
+                        className="flex-shrink-0 w-6 h-6 mr-4 text-white"
                         aria-hidden="true"
                       />
                       {item.name}
@@ -105,14 +105,14 @@ export default function Navbar() {
                   ))}
                 </nav>
               </div>
-              <div className="flex-shrink-0 flex border-t border-indigo-800 p-4">
-                <a href="#" className="flex-shrink-0 group block">
+              <div className="flex flex-shrink-0 p-4 border-t border-indigo-800">
+                <a href="#" className="flex-shrink-0 block group">
                   <div className="flex items-center">
                     <div>
                       {currentUser.photoURL ? (
                         <div className="flex-shrink-0">
                           <img
-                            className="h-12 w-12 rounded-full"
+                            className="w-12 h-12 rounded-full"
                             src={currentUser.photoURL}
                             alt=""
                           />
@@ -120,7 +120,7 @@ export default function Navbar() {
                       ) : (
                         <div className="flex-shrink-0">
                           <img
-                            className="inline-block h-10 w-10 rounded-full"
+                            className="inline-block w-10 h-10 rounded-full"
                             src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
                             alt=""
                           />
@@ -151,16 +151,16 @@ export default function Navbar() {
         </Dialog>
       </Transition.Root>
 
-      <div className="hidden bg-gradient-to-b bg-purple-600 md:flex md:flex-shrink-0">
+      <div className="hidden bg-purple-600 bg-gradient-to-b md:flex md:flex-shrink-0">
         <div className="flex flex-col w-64">
-          <div className="flex-1 flex flex-col min-h-0">
-            <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+          <div className="flex flex-col flex-1 min-h-0">
+            <div className="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
               <div className="flex items-center flex-shrink-0 px-4">
-                <h1 className="text-white text-2xl tracking-wider font-semibold">
-                  Q-Pong
+                <h1 className="text-2xl font-semibold tracking-wider text-white">
+                  <Link href="/">Q-Pong</Link>
                 </h1>
               </div>
-              <nav className="mt-5 flex-1 px-2 space-y-2">
+              <nav className="flex-1 px-2 mt-5 space-y-2">
                 {navigation.map((item) => (
                   <Link href={item.href} key={item.name}>
                     <a
@@ -171,7 +171,7 @@ export default function Navbar() {
                       }
                     >
                       <item.icon
-                        className="mr-3 flex-shrink-0 h-6 w-6 text-white"
+                        className="flex-shrink-0 w-6 h-6 mr-3 text-white"
                         aria-hidden="true"
                       />
                       {item.name}
@@ -180,14 +180,14 @@ export default function Navbar() {
                 ))}
               </nav>
             </div>
-            <div className="flex-shrink-0 flex  p-4 pb-8">
+            <div className="flex flex-shrink-0 p-4 pb-8">
               <Link href="/app/profile">
-                <a className="flex-shrink-0 w-full group block">
+                <a className="flex-shrink-0 block w-full group">
                   <div className="flex items-center">
                     {currentUser.photoURL ? (
                       <div className="flex-shrink-0">
                         <img
-                          className="h-12 w-12 rounded-full"
+                          className="w-12 h-12 rounded-full"
                           src={currentUser.photoURL}
                           alt=""
                         />
@@ -195,7 +195,7 @@ export default function Navbar() {
                     ) : (
                       <div className="flex-shrink-0">
                         <img
-                          className="inline-block h-10 w-10 rounded-full"
+                          className="inline-block w-10 h-10 rounded-full"
                           src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
                           alt=""
                         />
@@ -221,7 +221,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col absolute flex-1 top-2 right-3 bg-gray-100 rounded-xl shadow overflow-hidden z-20">
+      <div className="absolute z-20 flex flex-col flex-1 overflow-hidden bg-gray-100 shadow top-2 right-3 rounded-xl">
         <div className="md:hidden p-0.5">
           <button
             type="button"
@@ -229,7 +229,7 @@ export default function Navbar() {
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <MenuIcon className="h-6 w-6" aria-hidden="true" />
+            <MenuIcon className="w-6 h-6" aria-hidden="true" />
           </button>
         </div>
       </div>

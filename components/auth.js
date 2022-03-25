@@ -33,7 +33,6 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         setCurrentUser(currentUser);
         setLoading(false);
-        console.log(currentUser);
       } else {
         console.log("no user");
       }
