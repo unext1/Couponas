@@ -130,15 +130,15 @@ const Navbar = () => {
               </div>
               <div className="flex justify-around w-full px-5 my-auto ">
                 <div className="group">
-                  <Link href="/blog">
+                  <Link href="/login">
                     <a
                       className={`flex items-end justify-center w-full text-center  ${
-                        router.pathname == "/blog"
+                        router.pathname == "/login"
                           ? "text-red-500"
                           : "text-neutral-400"
                       }`}
                     >
-                      <span className="sr-only">Blog</span>
+                      <span className="sr-only">login</span>
                       <FolderIcon className="flex items-center w-6 h-6" />
                     </a>
                   </Link>

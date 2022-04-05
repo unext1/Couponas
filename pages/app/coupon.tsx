@@ -28,22 +28,22 @@ const Coupon = () => {
       body: JSON.stringify({ amount: e.target.amount.value }),
     }).then((res) => res.json());
 
-    const email = await fetch("/api/sendEmail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: e.target.receiverEmail.value,
-        amount: e.target.amount.value,
-        subject: "You have recieved a Q-Pong",
-        body: `${e.target.message.value}`,
-        url: res.url,
-      }),
-    });
+    //siusti is "/api/buyCoupon"
+    // const email = await fetch("/api/sendEmail", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     email: e.target.receiverEmail.value,
+    //     amount: e.target.amount.value,
+    //     subject: "You have recieved a Q-Pong",
+    //     body: `${e.target.message.value}`,
+    //     url: res.url,
+    //   }),
+    // });
 
     setQrCodeText(res.url);
-    console.log(res);
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Coupon = () => {
   const generateQrCode = async (qrCodeText: string) => {
     try {
       const response = await QRcode.toDataURL(qrCodeText);
-      // QRcode.toFileStream;
+      setQrCode(response);
       setErrorMessage("");
     } catch (error) {
       console.log(error);
@@ -77,7 +77,10 @@ const Coupon = () => {
     <div className="px-4 py-6 mx-auto max-w-7xl sm:px-6 md:px-8">
       <h1 className="text-2xl font-semibold text-gray-900">Project</h1>
       <div className="grid grid-cols-2 sm:gap-4 sm:pt-5">
-        <form className="" onSubmit={(e) => redirectToCheckout(e)}>
+        <form
+          className="col-span-2 mb-10 md:col-span-1 md:mb-0"
+          onSubmit={(e) => redirectToCheckout(e)}
+        >
           <div className="grid grid-cols-3 gap-5">
             <div className="col-span-2">
               <label className="block font-bold text-gray-800">
@@ -132,7 +135,7 @@ const Coupon = () => {
         </form>
 
         {qrCode && (
-          <div className="mx-auto ">
+          <div className="col-span-2 md:col-span-1 ">
             <div className="tracking-wide rounded shadow-lg">
               <div className="p-5 py-10 mb-4 bg-indigo-600 ">
                 <a href={qrCode} download>

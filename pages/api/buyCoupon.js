@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { sendMail } from "../../lib/sendMail";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -14,6 +15,9 @@ export default async function handler(req, res) {
       const session = await stripe.paymentLinks.create({
         line_items: [{ price: price.id, quantity: 1 }],
       });
+
+      // //sendEmail
+      // sendMail()
 
       res.status(200).json(session);
     } catch (err) {
