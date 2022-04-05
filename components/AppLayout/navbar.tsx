@@ -17,7 +17,7 @@ import { AuthContext } from "../auth";
 const navigation = [
   { name: "Dashboard", href: "/app", icon: HomeIcon },
   { name: "Profile", href: "/app/profile", icon: UsersIcon },
-  { name: "Projects", href: "/app/projects", icon: FolderIcon },
+  { name: "Coupons", href: "/app/coupon", icon: FolderIcon },
   { name: "Scanner", href: "/app/scanner", icon: ChartBarIcon },
 ];
 

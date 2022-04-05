@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { AuthContext } from "../components/auth";
 
@@ -9,10 +9,16 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/app");
+    }
+  }, [currentUser]);
+
   if (currentUser) {
     return (
-      <div className="text-center text-white mt-20">
-        <h1 className="mx-auto text-2xl font-bold  py-2 uppercase text-center">
+      <div className="mt-20 text-center text-white">
+        <h1 className="py-2 mx-auto text-2xl font-bold text-center uppercase">
           You already logged in silly !
         </h1>
         <Link href="/app">
@@ -23,10 +29,10 @@ const Register = () => {
   }
   return (
     <>
-      <div className="flex items-center justify-center container mx-auto my-auto px-5 py-5 pb-20 mt-20">
-        <div className="text-gray-500 rounded-3xl max-w-5xl shadow-xl w-full overflow-hidden">
-          <div className="md:flex w-full">
-            <div className="hidden md:block w-1/2 bg-gradient-to-r from-red-600 to-red-700  py-10 px-10">
+      <div className="container flex items-center justify-center px-5 py-5 pb-20 mx-auto my-auto mt-20">
+        <div className="w-full max-w-5xl overflow-hidden text-gray-500 shadow-xl rounded-3xl">
+          <div className="w-full md:flex">
+            <div className="hidden w-1/2 px-10 py-10 md:block bg-gradient-to-r from-red-600 to-red-700">
               <svg
                 id="a87032b8-5b37-4b7e-a4d9-4dbfbe394641"
                 data-name="Layer 1"
@@ -231,25 +237,25 @@ const Register = () => {
                 />
               </svg>
             </div>
-            <div className="w-full md:w-1/2 py-5 px-5 md:px-10 bg-brand-dark-600">
-              <div className="text-center pb-10">
-                <h1 className="font-bold text-3xl text-white pt-3">REGISTER</h1>
+            <div className="w-full px-5 py-5 md:w-1/2 md:px-10 bg-brand-dark-600">
+              <div className="pb-10 text-center">
+                <h1 className="pt-3 text-3xl font-bold text-white">REGISTER</h1>
                 <p>Enter your information to Login</p>
               </div>
               <form onSubmit={(e) => handleSignup(e, email, password)}>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
-                    <label className="text-xs uppercase px-1 text-gray-400">
+                    <label className="px-1 text-xs text-gray-400 uppercase">
                       {" "}
                       Email
                     </label>
                     <div className="flex">
-                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                        <i className="mdi mdi-email-outline text-gray-400 text-lg"></i>
+                      <div className="z-10 flex items-center justify-center w-10 pl-1 text-center pointer-events-none">
+                        <i className="text-lg text-gray-400 mdi mdi-email-outline"></i>
                       </div>
                       <input
                         type="email"
-                        className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-red-600"
+                        className="w-full py-2 pl-3 pr-3 -ml-10 border-2 border-gray-200 rounded-lg outline-none focus:border-red-600"
                         placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -259,22 +265,22 @@ const Register = () => {
                 </div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-12">
-                    <label className="text-xs uppercase px-1 text-gray-400">
+                    <label className="px-1 text-xs text-gray-400 uppercase">
                       Password
                     </label>
                     <div className="flex">
-                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                        <i className="mdi mdi-lock-outline text-gray-400 text-lg"></i>
+                      <div className="z-10 flex items-center justify-center w-10 pl-1 text-center pointer-events-none">
+                        <i className="text-lg text-gray-400 mdi mdi-lock-outline"></i>
                       </div>
                       <input
                         type="password"
-                        className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-red-600"
+                        className="w-full py-2 pl-3 pr-3 -ml-10 border-2 border-gray-200 rounded-lg outline-none focus:border-red-600"
                         placeholder="************"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
-                    <div className="flex container pt-3 pl-1 cursor-pointer hover:text-red-600 duration-100 transition  ">
+                    <div className="container flex pt-3 pl-1 transition duration-100 cursor-pointer hover:text-red-600 ">
                       <Link href="/login">
                         <h1>Go back to Login</h1>
                       </Link>
@@ -287,16 +293,16 @@ const Register = () => {
                     <input
                       type="submit"
                       value="REGISTER NOW"
-                      className="block w-full max-w-xs mx-auto bg-red-600 hover:bg-red-700 text-white rounded-lg px-3 py-3 font-semibold"
+                      className="block w-full max-w-xs px-3 py-3 mx-auto font-semibold text-white bg-red-600 rounded-lg hover:bg-red-700"
                     />
-                    <div className="w-full grid grid-cols-2 gap-2 mt-2">
+                    <div className="grid w-full grid-cols-2 gap-2 mt-2">
                       <button
                         onClick={(e) => googleLogin(e)}
-                        className="block w-full mx-auto bg-red-600 hover:bg-red-700 text-white rounded-lg px-3 py-3 font-semibold"
+                        className="block w-full px-3 py-3 mx-auto font-semibold text-white bg-red-600 rounded-lg hover:bg-red-700"
                       >
                         Google
                       </button>
-                      <button className="block w-full mx-auto bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-3 py-3 font-semibold">
+                      <button className="block w-full px-3 py-3 mx-auto font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700">
                         Facebook
                       </button>
                     </div>
