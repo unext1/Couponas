@@ -26,7 +26,7 @@ const Register = () => {
       <div className="flex items-center justify-center container mx-auto my-auto px-5 py-5 pb-20 mt-20">
         <div className="text-gray-500 rounded-3xl max-w-5xl shadow-xl w-full overflow-hidden">
           <div className="md:flex w-full">
-            <div className="hidden md:block w-1/2 bg-gradient-to-r bg-red-600  py-10 px-10">
+            <div className="hidden md:block w-1/2 bg-gradient-to-r from-red-600 to-red-700  py-10 px-10">
               <svg
                 id="a87032b8-5b37-4b7e-a4d9-4dbfbe394641"
                 data-name="Layer 1"
@@ -231,12 +231,10 @@ const Register = () => {
                 />
               </svg>
             </div>
-            <div className="w-full md:w-1/2 py-5 px-5 md:px-10 bg-brand-gray-900">
+            <div className="w-full md:w-1/2 py-5 px-5 md:px-10 bg-brand-dark-600">
               <div className="text-center pb-10">
                 <h1 className="font-bold text-3xl text-white pt-3">REGISTER</h1>
-                <p className="text-gray-400">
-                  Enter your information to Register
-                </p>
+                <p>Enter your information to Login</p>
               </div>
               <form onSubmit={(e) => handleSignup(e, email, password)}>
                 <div className="flex -mx-3">
@@ -276,8 +274,14 @@ const Register = () => {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
+                    <div className="flex container pt-3 pl-1 cursor-pointer hover:text-red-600 duration-100 transition  ">
+                      <Link href="/login">
+                        <h1>Go back to Login</h1>
+                      </Link>
+                    </div>
                   </div>
                 </div>
+
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
                     <input

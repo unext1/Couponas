@@ -25,11 +25,7 @@ const Login = () => {
   }
   return (
     <>
-      <div className="container mx-auto  px-5 pt-5 block md:hidden mt-20">
-        <h1 className="font-bold text-xl uppercase mb-1">Login page</h1>
-        <div className="h-2 w-full bg-gradient-to-r from-black via-gray-100 rounded to-gray-100" />
-      </div>
-      <div className="flex items-center justify-center container mx-auto my-auto px-5 py-5 pb-20">
+      <div className="flex items-center justify-center container mx-auto my-auto px-5 py-5 pb-20 mt-20">
         <div className="text-gray-500 rounded-3xl max-w-5xl shadow-xl w-full overflow-hidden">
           <div className="md:flex w-full">
             <div className="hidden md:block w-1/2 bg-gradient-to-r from-red-600 to-red-700  py-10 px-10">

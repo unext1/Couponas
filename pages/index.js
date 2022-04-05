@@ -23,7 +23,7 @@ export default function Home() {
               className="lg:pr-52"
             >
               <p className="flex text-sm text-white">
-                Hi there this is what i&#39;ve have came up with.
+                Hi, i hope you enjoy our service.
               </p>
               <motion.h1
                 className="-ml-1 text-6xl font-semibold tracking-wider text-transparent uppercase bg-clip-text bg-gradient-to-r from-red-500 to-blue-700 xl:text-7xl 2xl:text-8xl"
@@ -36,8 +36,8 @@ export default function Home() {
                 style={{ lineHeight: 1.3 }}
               >
                 Welcome to &quot;Q-Pong&quot;. The app where you can manage your
-                all coupons. Want to get started with your coupons ? Click here
-                !
+                all coupons. Want to integrate coupons to your buisness ? Click
+                here !
               </p>
               <div className="flex mt-10">
                 <motion.div
