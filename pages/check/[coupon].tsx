@@ -15,7 +15,7 @@ const YourCoupon = ({ paymentIntent }) => {
   if (!paymentIntent) {
     return (
       <div className="px-4 py-6 mx-auto max-w-7xl sm:px-6 md:px-8">
-        <div className="max-w-xl p-10 py-16 mx-auto mt-5 rounded-md shadow-xl bg-gray-50">
+        <div className="max-w-xl p-10 py-16 mx-auto mt-5 rounded-md shadow-xl bg-brand-dark-600">
           <h1>This Coupon was not found...</h1>
         </div>
       </div>
@@ -23,20 +23,24 @@ const YourCoupon = ({ paymentIntent }) => {
   }
   return (
     <div className="px-4 py-6 mx-auto max-w-7xl sm:px-6 md:px-8">
-      <div className="max-w-xl p-10 py-16 mx-auto mt-5 rounded-md shadow-xl bg-gray-50">
-        <h1 className="text-2xl font-bold text-center">Your Q-Pong</h1>
-        <p className="mt-2 text-sm text-center text-gray-500">
+      <div className="max-w-xl p-10 py-16 mx-auto mt-5 rounded-md shadow-xl bg-brand-dark-600">
+        <h1 className="text-2xl font-bold text-center text-white">
+          Your Q-Pong
+        </h1>
+        <p className="mt-2 text-sm text-center text-gray-400">
           Coupon ID # {paymentIntent?.id}
         </p>
-        <p className="mt-2 text-xs uppercase">
+        <p className="mt-2 text-xs text-gray-400 uppercase">
           Coupons status: {paymentIntent?.status}
         </p>
         <p className="mt-3"></p>
 
-        <div className="mt-5 mb-10">
+        <div className="mt-5 mb-10 text-white">
           <div className="flex justify-between w-full text-xl font-bold uppercase">
-            <h1>Coupons value is</h1>
-            <p> {formatter.format(paymentIntent?.amount)}</p>
+            <h1 className="text-white">Coupons value is</h1>
+            <p className="text-white">
+              {formatter.format(paymentIntent?.amount / 100)}
+            </p>
           </div>
         </div>
       </div>

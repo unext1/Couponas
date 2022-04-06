@@ -11,7 +11,7 @@ const Coupon = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [recepentsEmail, setRecepentsEmail] = useState(currentUser.email);
   const [amount, setAmount] = useState();
-  const [sentCoupon, setSentCoupon] = useState("");
+  const [sentCoupon, setSentCoupon] = useState(false);
 
   const [messege, setMessege] = useState();
 
@@ -20,6 +20,7 @@ const Coupon = () => {
     setRecepentsEmail(e.target.elements.receiverEmail.value);
     setAmount(e.target.amount.value);
     setMessege(e.target.message.value);
+    setSentCoupon(true);
 
     const res = await fetch("/api/buyCoupon", {
       method: "POST",
@@ -49,7 +50,6 @@ const Coupon = () => {
       const response = await QRcode.toDataURL(qrCodeText);
       setQrCode(response);
       setErrorMessage("");
-      setSentCoupon("");
     } catch (error) {
       console.log(error);
       if (error.message == "No input text") {

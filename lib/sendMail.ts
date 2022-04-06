@@ -48,7 +48,7 @@ export const sendMail = async ({
     to: email,
     subject: `${subject}`,
     html: `<h1><strong>You have recieved a Q-Pong</strong></h1>
-    Coupons value: <strong>${couponCode}</strong> <br/> <br/>
+    Coupons value: <strong>${couponsValue}</strong> <br/> <br/>
     Invoice url: ${url ? url : "Invoice has been paid."} <br/> <br/>
     Coupons url: ${
       couponCode
