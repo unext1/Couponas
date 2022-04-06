@@ -17,15 +17,15 @@ export default async function handler(req, res) {
         line_items: [{ price: price.id, quantity: 1 }],
       });
 
-      sendMail({
+      console.log(session, price);
+
+      return sendMail({
         amount,
         email,
         subject,
         body,
         url: session.url,
-      });
-
-      res.status(200).json(session);
+      }).then(() => res.status(200).json(session));
     } catch (err) {
       res.status(500).json({ statusCode: 500, message: err.message });
     }

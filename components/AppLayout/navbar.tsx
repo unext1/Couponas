@@ -87,21 +87,21 @@ export default function Navbar() {
                 </div>
                 <nav className="px-2 mt-5 space-y-1">
                   {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className={
-                        router.asPath == item.href
-                          ? "bg-indigo-600 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                          : "text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                      }
-                    >
-                      <item.icon
-                        className="flex-shrink-0 w-6 h-6 mr-4 text-white"
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </a>
+                    <Link key={item.name} href={item.href}>
+                      <a
+                        className={
+                          router.asPath == item.href
+                            ? "bg-indigo-600 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                            : "text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                        }
+                      >
+                        <item.icon
+                          className="flex-shrink-0 w-6 h-6 mr-4 text-white"
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </a>
+                    </Link>
                   ))}
                 </nav>
               </div>
