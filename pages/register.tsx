@@ -16,16 +16,7 @@ const Register = () => {
   }, [currentUser]);
 
   if (currentUser) {
-    return (
-      <div className="mt-20 text-center text-white">
-        <h1 className="py-2 mx-auto text-2xl font-bold text-center uppercase">
-          You already logged in silly !
-        </h1>
-        <Link href="/app">
-          <a>Press here to go back to app</a>
-        </Link>
-      </div>
-    );
+    return <div></div>;
   }
   return (
     <>

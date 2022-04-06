@@ -10,24 +10,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const auth = getAuth();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (currentUser) {
       router.push("/app");
+      setLoading(false);
     }
   }, [currentUser]);
 
   if (currentUser) {
-    return (
-      <div className="text-center text-white">
-        <h1 className="py-2 mx-auto text-2xl font-bold text-center uppercase">
-          You already logged in silly !
-        </h1>
-        <Link href="/app">
-          <a>Press here to go back to app</a>
-        </Link>
-      </div>
-    );
+    return <div></div>;
   }
   return (
     <>

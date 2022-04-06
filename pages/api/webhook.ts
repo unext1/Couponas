@@ -41,7 +41,6 @@ export default handler;
 const handleEvent = async (event: Stripe.Event) => {
   if (event.type == "checkout.session.completed") {
     const paymentIntent = event.data.object as Stripe.Checkout.Session;
-    console.log(paymentIntent);
 
     const {
       customer_details: { email },

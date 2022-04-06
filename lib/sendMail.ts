@@ -44,7 +44,7 @@ export const sendMail = async ({
     attachments.push({ path: qrCode });
   }
 
-  const mailData = await transporter.sendMail({
+  const mailData = {
     from: process.env.SEND_EMAIL_USER,
     to: email,
     subject: `${subject}`,
@@ -53,7 +53,7 @@ export const sendMail = async ({
       couponCode ? couponCode : null
     } `,
     attachments,
-  });
+  };
 
   return await new Promise((resolve, reject) => {
     transporter.sendMail(mailData, (error, info) => {

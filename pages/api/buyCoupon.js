@@ -5,7 +5,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   const { amount, email, subject, body } = req.body;
-  console.log(amount, email, subject, body);
   if (req.method === "POST") {
     try {
       const price = await stripe.prices.create({
