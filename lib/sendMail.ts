@@ -28,11 +28,23 @@ export const sendMail = async ({
   couponCode,
 }: SendMailProps) => {
   const attachments = [];
+
+  await new Promise((resolve, reject) => {
+    transporter.verify(function (error, success) {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(success);
+      }
+    });
+  });
+
   if (couponCode) {
     const qrCode = await QRcode.toDataURL(couponCode);
     attachments.push({ path: qrCode });
   }
-  return transporter.sendMail({
+
+  const mailData = await transporter.sendMail({
     from: process.env.SEND_EMAIL_USER,
     to: email,
     subject: `${subject}`,
@@ -41,5 +53,15 @@ export const sendMail = async ({
       couponCode ? couponCode : null
     } `,
     attachments,
+  });
+
+  return await new Promise((resolve, reject) => {
+    transporter.sendMail(mailData, (error, info) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(info);
+      }
+    });
   });
 };
