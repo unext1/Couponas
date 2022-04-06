@@ -11,6 +11,7 @@ const Coupon = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [recepentsEmail, setRecepentsEmail] = useState(currentUser.email);
   const [amount, setAmount] = useState();
+  const [sentCoupon, setSentCoupon] = useState("");
 
   const [messege, setMessege] = useState();
 
@@ -48,6 +49,7 @@ const Coupon = () => {
       const response = await QRcode.toDataURL(qrCodeText);
       setQrCode(response);
       setErrorMessage("");
+      setSentCoupon("");
     } catch (error) {
       console.log(error);
       if (error.message == "No input text") {
@@ -76,17 +78,20 @@ const Coupon = () => {
               <label className="block font-bold text-gray-800">
                 Receivers Email:
               </label>
+              <p className="my-1 text-xs uppercase">
+                (For testing purpuses just write in your email)
+              </p>
               <input
                 required
                 name="receiverEmail"
                 type="email"
                 placeholder="Receiver Email"
-                defaultValue={currentUser.email}
                 className="w-full py-2 pl-3 mt-2 border border-gray-300 rounded outline-none focus:ring-indigo-600 :ring-indigo-600"
               />
             </div>
             <div className="col-span-1">
               <label className="block font-bold text-gray-800">Amount:</label>
+              <p className="my-1 text-xs uppercase">(Any amount)</p>
               <input
                 required
                 name="amount"
@@ -96,7 +101,7 @@ const Coupon = () => {
                   (event) => setText(event.target.value.replace(/\D/, ""))
                   // setText(event.target.value)
                 }
-                placeholder="$"
+                placeholder="SEK"
                 className="w-full py-2 pl-3 mt-2 border border-gray-300 rounded outline-none focus:ring-indigo-600 :ring-indigo-600"
               />
             </div>
@@ -104,6 +109,7 @@ const Coupon = () => {
           <div className="mt-2"></div>
           <div className="mt-2 ">
             <label className="block font-bold text-gray-800">Message:</label>
+            <p className="my-1 text-xs uppercase">(Not must)</p>
             <textarea
               name="message"
               placeholder="<3"
@@ -122,6 +128,26 @@ const Coupon = () => {
             className="inline-flex justify-center w-full px-4 py-2 mt-5 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           />
           {errorMessage && <p className="mt-2 text-red-600">{errorMessage}</p>}
+
+          {sentCoupon && (
+            <p className="mt-2 text-xs uppercase">
+              ! The coupon will be sent to the Recievers Email. So if you put in
+              your email check it.
+              <br></br> <br></br>
+              Press on invoice url, which will redirect you to checkout page.
+              <br></br>
+              <br></br>
+              <strong>The card testing details are:</strong>
+              <br></br> <br></br>
+              Card: 4242 4242 4242 4242 <br></br>
+              <br></br>
+              CVV: 424 <br></br>
+              <br></br>
+              Expires: 4/24
+              <br></br> <br></br>
+              After paying, check your email again ! :-)
+            </p>
+          )}
         </form>
 
         {qrCode && (
