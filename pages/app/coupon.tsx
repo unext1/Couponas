@@ -25,23 +25,13 @@ const Coupon = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount: e.target.amount.value }),
+      body: JSON.stringify({
+        amount: e.target.amount.value,
+        email: e.target.receiverEmail.value,
+        subject: "You have recieved a Q-Pong",
+        body: `${e.target.message.value}`,
+      }),
     }).then((res) => res.json());
-
-    //siusti is "/api/buyCoupon"
-    // const email = await fetch("/api/sendEmail", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     email: e.target.receiverEmail.value,
-    //     amount: e.target.amount.value,
-    //     subject: "You have recieved a Q-Pong",
-    //     body: `${e.target.message.value}`,
-    //     url: res.url,
-    //   }),
-    // });
 
     setQrCodeText(res.url);
   };

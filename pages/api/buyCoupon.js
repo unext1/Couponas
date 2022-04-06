@@ -4,10 +4,12 @@ import { sendMail } from "../../lib/sendMail";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
+  const { amount, email, subject, body } = req.body;
+  console.log(amount, email, subject, body);
   if (req.method === "POST") {
     try {
       const price = await stripe.prices.create({
-        unit_amount: req.body.amount,
+        unit_amount: req.body.amount * 100,
         currency: "sek",
         product: "prod_LSCO9adM5O8vAw",
       });
@@ -16,8 +18,13 @@ export default async function handler(req, res) {
         line_items: [{ price: price.id, quantity: 1 }],
       });
 
-      // //sendEmail
-      // sendMail()
+      sendMail({
+        amount,
+        email,
+        subject,
+        body,
+        url: session.url,
+      });
 
       res.status(200).json(session);
     } catch (err) {

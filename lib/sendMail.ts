@@ -32,7 +32,6 @@ export const sendMail = async ({
     const qrCode = await QRcode.toDataURL(couponCode);
     attachments.push({ path: qrCode });
   }
-
   return transporter.sendMail({
     from: process.env.SEND_EMAIL_USER,
     to: email,
