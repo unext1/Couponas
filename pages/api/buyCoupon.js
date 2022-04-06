@@ -17,8 +17,6 @@ export default async function handler(req, res) {
         line_items: [{ price: price.id, quantity: 1 }],
       });
 
-      console.log(session, price);
-
       return sendMail({
         amount,
         email,

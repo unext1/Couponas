@@ -23,8 +23,7 @@ const handler = async (req, res) => {
 
     try {
       event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
-      handleEvent(event);
-      return res.json({ received: true });
+      return handleEvent(event).then(() => res.json({ received: true }));
     } catch (err) {
       console.log(err);
       res.status(400).send(`Webhook Error: ${err.message}`);
@@ -50,7 +49,7 @@ const handleEvent = async (event: Stripe.Event) => {
     } = paymentIntent;
 
     if (status === "complete") {
-      sendMail({
+      return sendMail({
         amount: amount_total,
         email: email,
         subject: "Payment Successful",
@@ -58,4 +57,5 @@ const handleEvent = async (event: Stripe.Event) => {
       });
     }
   }
+  return true;
 };

@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
         console.log("no user");
       }
     });
-  }, []);
+  }, [auth]);
 
   const profileUpdate = (dN, pU) => {
     let oldUser = currentUser;
