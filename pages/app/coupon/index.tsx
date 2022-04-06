@@ -1,6 +1,6 @@
 import QRcode from "qrcode";
 import { useState, useRef, useEffect, useContext } from "react";
-import { AuthContext } from "../../components/auth";
+import { AuthContext } from "../../../components/auth";
 
 const Coupon = () => {
   const { currentUser, logout, profileUpdate } = useContext(AuthContext);
@@ -65,7 +65,7 @@ const Coupon = () => {
 
   return (
     <div className="px-4 py-6 mx-auto max-w-7xl sm:px-6 md:px-8">
-      <h1 className="text-2xl font-semibold text-gray-900">Project</h1>
+      <h1 className="text-2xl font-semibold text-gray-900">Coupon Form</h1>
       <div className="grid grid-cols-2 sm:gap-4 sm:pt-5">
         <form
           className="col-span-2 mb-10 md:col-span-1 md:mb-0"
@@ -118,14 +118,14 @@ const Coupon = () => {
           /> */}
           <input
             type="submit"
-            value="Generate Payment Link"
+            value="Send Coupon"
             className="inline-flex justify-center w-full px-4 py-2 mt-5 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           />
           {errorMessage && <p className="mt-2 text-red-600">{errorMessage}</p>}
         </form>
 
         {qrCode && (
-          <div className="col-span-2 md:col-span-1 ">
+          <div className="col-span-2 mx-auto md:col-span-1 ">
             <div className="tracking-wide rounded shadow-lg">
               <div className="p-5 py-10 mb-4 bg-indigo-600 ">
                 <a href={qrCode} download>

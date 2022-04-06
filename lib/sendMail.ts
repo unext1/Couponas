@@ -29,7 +29,9 @@ export const sendMail = async ({
 }: SendMailProps) => {
   const attachments = [];
   if (couponCode) {
-    const qrCode = await QRcode.toDataURL(couponCode);
+    const qrCode = await QRcode.toDataURL(
+      `https://qpon.vercel.app/app/coupon/${couponCode}`
+    );
     attachments.push({ path: qrCode });
   }
 
@@ -37,10 +39,14 @@ export const sendMail = async ({
     from: process.env.SEND_EMAIL_USER,
     to: email,
     subject: `${subject}`,
-    text: `Gauta iš: ${email}, ${body}`,
-    html: `Gauta iš: ${email}, <br/> <br/> ${url}, ${
-      couponCode ? couponCode : null
-    } `,
+    html: `<h1><strong>You have recieved a Q-Pong</strong></h1> <br/> <br/> 
+    Coupons value: ${amount} <br/> <br/>
+    Invoice url: ${url ? url : "Invoice has been paid."} <br/> <br/>
+    Coupons url: ${
+      couponCode
+        ? couponCode
+        : "Coupon will be recieved after paying the invoice."
+    } <br/> <br/> `,
     attachments,
   });
 };
