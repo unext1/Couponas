@@ -79,13 +79,14 @@ const Coupon = () => {
                 Receivers Email:
               </label>
               <p className="my-1 text-xs uppercase">
-                (For testing purpuses just write in your email)
+                (For tesing purposes write in your Email)
               </p>
               <input
                 required
                 name="receiverEmail"
                 type="email"
                 placeholder="Receiver Email"
+                defaultValue={currentUser.email}
                 className="w-full py-2 pl-3 mt-2 border border-gray-300 rounded outline-none focus:ring-indigo-600 :ring-indigo-600"
               />
             </div>
